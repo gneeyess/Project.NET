@@ -6,7 +6,7 @@
 <h1>Requirements:</h1>
 <ul>
   <li>Application architecture: 3-level client-server (+ intermediate layer with repositories)
-(Scheme:https://www.figma.com/file/9wgYj9NBONd43Y6QrbwOsq/Untitled?node-id=0%3A1)
+(Scheme: https://www.figma.com/file/9wgYj9NBONd43Y6QrbwOsq/Untitled?node-id=0%3A1)
  </li>
   <li>Implement the application using .NET Core 3.1 and REST API technology</li>
   <li>There should be support for 2 types of roles: user and administrator</li>
@@ -31,7 +31,7 @@ Fluent API: https://docs.microsoft.com/en-us/ef/ef6/modeling/code-first/fluent/t
   <li>There is also a text field and a search button on the page. According to the substring entered by the user, excursions are searched for by name</li>
   <li>Filtration. Filtration categories: city, price, dates (start/end), type of tour and transport. There is a button to reset filters and show filter results. If none of the categories is changed, the resulting query displays tours for all categories</li>
   <li>If the user is not logged in, the pages display the registration/authorization buttons</li>
-  <li>After authorization, instead of the registration / authorization buttons, the user's personal account button is shown</li>
+  <li>After authorization, instead of the registration/authorization buttons, the user's personal account button is shown</li>
   <li>Excursion data output is displayed as cards with minimal information: name, route, dates, duration, price</li>
   <li>By clicking on the tour card, the user goes to a separate page of the tour, which contains full information about it. There is also a button for booking a place for this tour</li>
   <li>The personal account displays the username, as well as a list of booked excursions</li>
