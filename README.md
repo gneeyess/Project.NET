@@ -7,7 +7,7 @@
 <ul>
   <li>Application architecture: 3-level client-server (+ intermediate layer with repositories)
 (Scheme: https://www.figma.com/file/9wgYj9NBONd43Y6QrbwOsq/Untitled?node-id=0%3A1)
-<img src="scheme.png" style="width: 50%; height: auto;"/>
+<img src="scheme.png" style="width: 70%; height: auto;"/>
  </li>
   <li>Implement the application using .NET Core 3.1 and REST API technology</li>
   <li>There should be support for 2 types of roles: user and administrator</li>
