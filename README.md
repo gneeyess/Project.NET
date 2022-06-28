@@ -40,7 +40,7 @@ Fluent API: https://docs.microsoft.com/en-us/ef/ef6/modeling/code-first/fluent/t
 </ul>
 <br>
 <h1>App example:</h1>
-<img/>
+<img src="example.png"/>
 <br>
 <h1>Additionally:</h1>
 <ul>
