@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Modsen.App.Core.Abstractions
 {
-    abstract class BaseEntity
+    public abstract class BaseEntity
     {
         public int Id { get; set; }
         //something else???

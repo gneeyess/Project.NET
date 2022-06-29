@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Modsen.App.Core.Models
 {
-    class TourType : Abstractions.BaseEntity
+    public class TourType : Abstractions.BaseEntity
     {
         public string Name { get; set; }
 

@@ -1,16 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.OpenApi.Models;
+using Modsen.App.Core.Models;
+using Modsen.App.DataAccess.Abstractions;
+using Modsen.App.DataAccess.Data;
+using Modsen.App.DataAccess.Repositories;
 
 namespace Modsen.App.WebHost
 {
@@ -31,10 +29,26 @@ namespace Modsen.App.WebHost
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Modsen.App", Version = "v1" });
             });
+
+            services.AddDbContext<ApplicationContext>(optionsAction =>
+            {
+                optionsAction.UseInMemoryDatabase("ModsenDataBase");
+                optionsAction.UseLazyLoadingProxies();
+            });
+
+            services.AddScoped<IRepository<Booking>, EFBookingRepository>();
+            services.AddScoped<IRepository<Tour>, EFTourRepository>();
+            services.AddScoped<IRepository<TourType>, EFTourTypeRepository>();
+            services.AddScoped<IRepository<Transport>, EFTransportRepository>();
+            services.AddScoped<IRepository<User>, EFUserRepository>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddScoped<IDBInitializer, EFDBInitiliazer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDBInitializer dbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -58,6 +72,8 @@ namespace Modsen.App.WebHost
             {
                 endpoints.MapControllers();
             });
+
+            dbInitializer.Initialize();
         }
     }
 }

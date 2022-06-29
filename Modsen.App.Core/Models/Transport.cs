@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Modsen.App.Core.Models
 {
-    class Transport : Abstractions.BaseEntity
+    public class Transport : Abstractions.BaseEntity
     {
         public string Name { get; set; }
 

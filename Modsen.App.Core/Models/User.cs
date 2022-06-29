@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Modsen.App.Core.Models
 {
-    class User : Abstractions.BaseEntity
+    public class User : Abstractions.BaseEntity
     {
         public string Name_f { get; set; }
 
