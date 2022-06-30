@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Modsen.App.Core.Models;
 using Modsen.App.DataAccess.Abstractions;
+using Modsen.App.DataAccess.Configurations;
 using Modsen.App.DataAccess.Data;
 using Modsen.App.DataAccess.Repositories;
 
@@ -35,6 +36,9 @@ namespace Modsen.App.WebHost
                 optionsAction.UseSqlServer(Configuration.GetConnectionString("ModsenAppDB"), c => c.MigrationsAssembly(typeof(Startup).Assembly.FullName));
                 optionsAction.UseLazyLoadingProxies();
             });
+
+            services.AddScoped<IEntityTypeConfiguration<User>, UserConfiguration>();
+            services.AddScoped<IEntityTypeConfiguration<Transport>, TransportConfiguration>();
 
             services.AddScoped<IRepository<Booking>, EFBookingRepository>();
             services.AddScoped<IRepository<Tour>, EFTourRepository>();
