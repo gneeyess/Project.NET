@@ -9,11 +9,12 @@ namespace Modsen.App.DataAccess.Configurations
         public void Configure(EntityTypeBuilder<Booking> builder)
         {
             builder.Property(p => p.Id).IsRequired();
+
             builder.Property(p => p.Date).IsRequired();
             builder.Property(p => p.Tour).IsRequired();
             builder.Property(p => p.User).IsRequired();
 
-            //Тут так не написать price > 0, HasMinLegth. Нет таких свойств.
+            //Увы тут нельзя написать price > 0, HasMinLegth. Нет таких свойств.
         }
     }
 }
