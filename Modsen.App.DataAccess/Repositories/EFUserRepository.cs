@@ -11,11 +11,13 @@ namespace Modsen.App.DataAccess.Repositories
     {
         private ApplicationContext _context;
         private DbSet<User> _dbSet;
+
         public EFUserRepository(ApplicationContext context)
         {
             _context = context;
             _dbSet = _context.Set<User>();
         }
+
         public async Task AddAsync(User user)
         {
             await _dbSet.AddAsync(user);
@@ -40,9 +42,7 @@ namespace Modsen.App.DataAccess.Repositories
 
         public async Task<User> GetByIdAsync(int id)
         {
-            var user = await _dbSet.FindAsync(id);
-
-            return user;
+            return await _dbSet.FindAsync(id);
         }
 
         public async Task UpdateAsync(User user)

@@ -11,11 +11,13 @@ namespace Modsen.App.DataAccess.Repositories
     {
         private ApplicationContext _context;
         private DbSet<Transport> _dbSet;
+
         public EFTransportRepository(ApplicationContext context)
         {
             _context = context;
             _dbSet = _context.Set<Transport>();
         }
+
         public async Task AddAsync(Transport transport)
         {
             await _dbSet.AddAsync(transport);
@@ -40,9 +42,7 @@ namespace Modsen.App.DataAccess.Repositories
 
         public async Task<Transport> GetByIdAsync(int id)
         {
-            var transport = await _dbSet.FindAsync(id);
-
-            return transport;
+            return await _dbSet.FindAsync(id);
         }
 
         public async Task UpdateAsync(Transport transport)

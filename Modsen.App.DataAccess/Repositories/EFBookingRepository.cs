@@ -11,11 +11,13 @@ namespace Modsen.App.DataAccess.Repositories
     {
         private ApplicationContext _context;
         private DbSet<Booking> _dbSet;
+
         public EFBookingRepository(ApplicationContext context)
         {
             _context = context;
             _dbSet = _context.Set<Booking>();
         }
+
         public async Task AddAsync(Booking booking)
         {
             await _dbSet.AddAsync(booking);
@@ -40,9 +42,7 @@ namespace Modsen.App.DataAccess.Repositories
 
         public async Task<Booking> GetByIdAsync(int id)
         {
-            var booking = await _dbSet.FindAsync(id);
-
-            return booking;
+            return await _dbSet.FindAsync(id);
         }
 
         public async Task UpdateAsync(Booking booking)
