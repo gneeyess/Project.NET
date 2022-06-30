@@ -9,11 +9,12 @@ namespace Modsen.App.Core.Models
         public string Name { get; set; }
 
         // connection with Tour model
+
         public virtual ICollection<Tour> Tours { get; set; }
+
         public TourType()
         {
             Tours = new List<Tour>();
         }
-
     }
 }
