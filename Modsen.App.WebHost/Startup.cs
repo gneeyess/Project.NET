@@ -60,8 +60,6 @@ namespace Modsen.App.WebHost
                 });
             }
 
-            
-
             app.UseHttpsRedirection();
 
             app.UseRouting();

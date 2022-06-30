@@ -8,7 +8,8 @@ namespace Modsen.App.DataAccess.Configurations
 	{
         public void Configure(EntityTypeBuilder<Booking> builder)
         {
-            builder.Property(p => p.Id).IsRequired();
+            builder.HasKey(booking => booking.Id);
+            builder.HasIndex(booking => booking.Id).IsUnique();
 
             builder.Property(p => p.Date).IsRequired();
             builder.Property(p => p.Tour).IsRequired();
