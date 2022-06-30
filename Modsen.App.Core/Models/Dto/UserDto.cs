@@ -2,7 +2,8 @@
 
 namespace Modsen.App.Core.Models.Dto
 {
-    public class UserDto
+    //Data Transfer Object
+    public class UserDto 
     {
         public string Name_f { get; set; }
 

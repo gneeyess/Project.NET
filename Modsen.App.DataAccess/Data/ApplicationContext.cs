@@ -9,6 +9,9 @@ namespace Modsen.App.DataAccess.Data
     {
         private readonly IEntityTypeConfiguration<User> _userEntityTypeConfiguration;
         private readonly IEntityTypeConfiguration<Transport> _transportEntityTypeConfiguration;
+        private readonly IEntityTypeConfiguration<Tour> _tourEntityTypeConfiguration;
+        private readonly IEntityTypeConfiguration<TourType> _tourTypeEntityTypeConfiguration;
+        private readonly IEntityTypeConfiguration<Booking> _bookingEntityTypeConfiguration;
 
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Tour> Tours { get; set; }
@@ -19,19 +22,32 @@ namespace Modsen.App.DataAccess.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //fluent api
+
             modelBuilder.Entity<User>(_userEntityTypeConfiguration.Configure);
             modelBuilder.Entity<Transport>(_transportEntityTypeConfiguration.Configure);
+            modelBuilder.Entity<Booking>(_bookingEntityTypeConfiguration.Configure);
+            modelBuilder.Entity<Tour>(_tourEntityTypeConfiguration.Configure);
+            modelBuilder.Entity<TourType>(_tourTypeEntityTypeConfiguration.Configure);
 
             base.OnModelCreating(modelBuilder);
         }
 
-        public ApplicationContext(DbContextOptions<ApplicationContext> contextOptionsBuilder,
-               IEntityTypeConfiguration<User> userEntityTypeConfiguration,
-               IEntityTypeConfiguration<Transport> transportEntityTypeConfiguration)
+        public ApplicationContext
+        (
+            DbContextOptions<ApplicationContext> contextOptionsBuilder,
+            IEntityTypeConfiguration<User> userEntityTypeConfiguration,
+            IEntityTypeConfiguration<Transport> transportEntityTypeConfiguration,
+            IEntityTypeConfiguration<Booking> bookingEntityTypeConfiguration,
+            IEntityTypeConfiguration<Tour> tourEntityTypeConfiguration,
+            IEntityTypeConfiguration<TourType> tourTypeEntityTypeConfiguration
+        )
             : base(contextOptionsBuilder)
         {
             _transportEntityTypeConfiguration = transportEntityTypeConfiguration;
             _userEntityTypeConfiguration = userEntityTypeConfiguration;
+            _tourEntityTypeConfiguration = tourEntityTypeConfiguration;
+            _tourTypeEntityTypeConfiguration = tourTypeEntityTypeConfiguration;
+            _bookingEntityTypeConfiguration = bookingEntityTypeConfiguration;
         }
     }
 }

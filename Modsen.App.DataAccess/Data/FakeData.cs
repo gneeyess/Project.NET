@@ -5,6 +5,8 @@ namespace Modsen.App.DataAccess.Data
 {
     public static class FakeData
     {
+        //Будет заменена на SQL
+
         public static ICollection<Booking> Bookings = new List<Booking>();
 
         public static ICollection<Tour> Tours = new List<Tour>();
