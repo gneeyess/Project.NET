@@ -6,6 +6,9 @@ namespace Modsen.App.DataAccess.Data
 {
     public class ApplicationContext : DbContext
     {
+        private readonly IEntityTypeConfiguration<User> _userEntityTypeConfiguration;
+        private readonly IEntityTypeConfiguration<Transport> _transportEntityTypeConfiguration;
+
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Tour> Tours { get; set; }
         public DbSet<TourType> TourTypes { get; set; }
@@ -15,28 +18,20 @@ namespace Modsen.App.DataAccess.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //fluent api
-            modelBuilder.Entity<User>(UserConfigure);
-            modelBuilder.Entity<Transport>(TransportConfigure);
+            modelBuilder.Entity<User>(_userEntityTypeConfiguration.Configure);
+
+            modelBuilder.Entity<Transport>(_transportEntityTypeConfiguration.Configure);
 
             base.OnModelCreating(modelBuilder);
         }
-        public void UserConfigure(EntityTypeBuilder<User> builder)
-        {
-            builder.Property(p => p.Name_f).IsRequired().HasMaxLength(15);
-            builder.Property(p => p.Name_l).IsRequired().HasMaxLength(15);
-            builder.Property(p => p.Email).HasMaxLength(50);
-            builder.Property(p => p.Phone).IsRequired().HasMaxLength(9); // +375 (xx) xxx-xx-xx
-            builder.Property(p => p.Password).IsRequired().HasMaxLength(250);
-        }
 
-        public void TransportConfigure(EntityTypeBuilder<Transport> builder)
-        {
-            builder.Property(p => p.Name).IsRequired().HasMaxLength(15);           
-        }
-
-
-        public ApplicationContext(DbContextOptions<ApplicationContext> contextOptionsBuilder)
+        public ApplicationContext(DbContextOptions<ApplicationContext> contextOptionsBuilder,
+               IEntityTypeConfiguration<User> userEntityTypeConfiguration,
+               IEntityTypeConfiguration<Transport> transportEntityTypeConfiguration)
             : base(contextOptionsBuilder)
-        { }
+        {
+            _transportEntityTypeConfiguration = transportEntityTypeConfiguration;
+            _userEntityTypeConfiguration = userEntityTypeConfiguration;
+        }
     }
 }
