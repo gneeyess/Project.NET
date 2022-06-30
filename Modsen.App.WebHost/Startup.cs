@@ -32,7 +32,7 @@ namespace Modsen.App.WebHost
 
             services.AddDbContext<ApplicationContext>(optionsAction =>
             {
-                optionsAction.UseSqlServer(Configuration.GetConnectionString("ModsenAppDB"), c => c.MigrationsAssembly(typeof(Startup).Assembly.FullName));
+                optionsAction.UseInMemoryDatabase("ModsenDataBase");
                 optionsAction.UseLazyLoadingProxies();
             });
 
