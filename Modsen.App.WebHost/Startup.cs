@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Modsen.App.Core.Mapping;
 using Modsen.App.Core.Models;
 using Modsen.App.DataAccess.Abstractions;
 using Modsen.App.DataAccess.Data;
@@ -43,6 +45,8 @@ namespace Modsen.App.WebHost
             services.AddScoped<IRepository<User>, EFUserRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddAutoMapper(typeof(UserMapper));
 
             services.AddScoped<IDBInitializer, EFDBInitiliazer>();
         }

@@ -12,6 +12,5 @@ namespace Modsen.App.Core.Models
         public virtual User User { get; set; }
 
         public virtual Tour Tour { get; set; }
-
     }
 }

@@ -1,27 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Modsen.App.Core.Models
 {
     public class User : Abstractions.BaseEntity
     {
-        public string Name_f { get; set; }
+        public string FirstName { get; set; }
 
-        public string Name_l { get; set; }
+        public string LastName { get; set; }
 
         public string Email { get; set; }
 
         public string Phone { get; set; }
 
         // hash of the password
-        public string Password { get; set; }
+        public string PasswordHash { get; set; }
 
         // false-user, true-admin
+            // Может тут лучше использовать не bool?
         public bool Role { get; set; }
 
         // connection with Booking model
         public virtual ICollection<Booking> Bookings { get; set; }
+
         public User()
         {
             Bookings = new List<Booking>();

@@ -12,6 +12,7 @@ namespace Modsen.App.DataAccess.Repositories
         private readonly IRepository<TourType> _tourTypeRepository;
         private readonly IRepository<Transport> _transportRepository;
         private readonly IRepository<User> _userRepository;
+
         public UnitOfWork(IRepository<Booking> bookingRepository,
             IRepository<Tour> tourRepository,
             IRepository<TourType> tourTypeRepository,
@@ -39,6 +40,5 @@ namespace Modsen.App.DataAccess.Repositories
         {
             GC.SuppressFinalize(this);
         }
-
     }
 }

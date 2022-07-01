@@ -11,11 +11,13 @@ namespace Modsen.App.DataAccess.Repositories
     {
         private ApplicationContext _context;
         private DbSet<Tour> _dbSet;
+
         public EFTourRepository(ApplicationContext context)
         {
             _context = context;
             _dbSet = _context.Set<Tour>();
         }
+
         public async Task AddAsync(Tour tour)
         {
             await _dbSet.AddAsync(tour);
@@ -40,9 +42,7 @@ namespace Modsen.App.DataAccess.Repositories
 
         public async Task<Tour> GetByIdAsync(int id)
         {
-            var tour = await _dbSet.FindAsync(id);
-
-            return tour;
+            return await _dbSet.FindAsync(id);
         }
 
         public async Task UpdateAsync(Tour tour)
