@@ -11,6 +11,8 @@ using Modsen.App.DataAccess.Abstractions;
 using Modsen.App.DataAccess.Configurations;
 using Modsen.App.DataAccess.Data;
 using Modsen.App.DataAccess.Repositories;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 
 namespace Modsen.App.WebHost
 {
@@ -26,6 +28,22 @@ namespace Modsen.App.WebHost
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddAuthentication(config =>
+            {
+                config.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                config.DefaultChallengeScheme = "oidc";
+            })
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddOpenIdConnect("oidc", config =>
+                {
+                    config.Authority = "https://localhost:10001";
+                    config.ClientId = "client_id_test";
+                    config.ClientSecret = "client_secret_test";
+                    config.SaveTokens = true;
+                    config.ResponseType = "code";
+                });
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -72,17 +90,18 @@ namespace Modsen.App.WebHost
                 });
             }
 
-            
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapDefaultControllerRoute();
+                //endpoints.MapControllers();
             });
 
             dbInitializer.Initialize();
