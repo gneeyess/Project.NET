@@ -13,10 +13,11 @@ namespace Modsen.App.Core.Models
         public string Phone { get; set; }
 
         // hash of the password
-        public string PasswordHash { get; set; }
+        public string Password { get; set; }
+        public string RepeatPassword { get; set; }
 
         // false-user, true-admin
-            // Может тут лучше использовать не bool?
+        // Может тут лучше использовать не bool?
         public bool Role { get; set; }
 
         // connection with Booking model
