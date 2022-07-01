@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using Modsen.App.Core.Mapping;
 using Modsen.App.Core.Models;
 using Modsen.App.DataAccess.Abstractions;
+using Modsen.App.DataAccess.Configurations;
 using Modsen.App.DataAccess.Data;
 using Modsen.App.DataAccess.Repositories;
 
@@ -34,15 +34,23 @@ namespace Modsen.App.WebHost
 
             services.AddDbContext<ApplicationContext>(optionsAction =>
             {
-                optionsAction.UseInMemoryDatabase("ModsenDataBase");
+                optionsAction.UseSqlServer(Configuration.GetConnectionString("ModsenAppDataBase"),
+                    c => c.MigrationsAssembly(typeof(Startup).Assembly.FullName));
                 optionsAction.UseLazyLoadingProxies();
             });
-
+            //repositories
             services.AddScoped<IRepository<Booking>, EFBookingRepository>();
             services.AddScoped<IRepository<Tour>, EFTourRepository>();
             services.AddScoped<IRepository<TourType>, EFTourTypeRepository>();
             services.AddScoped<IRepository<Transport>, EFTransportRepository>();
             services.AddScoped<IRepository<User>, EFUserRepository>();
+            //fluent api
+            services.AddScoped<IEntityTypeConfiguration<Booking>, BookingConfiguration>();
+            services.AddScoped<IEntityTypeConfiguration<Tour>, TourConfiguration>();
+            services.AddScoped<IEntityTypeConfiguration<TourType>, TourTypeConfiguration>();
+            services.AddScoped<IEntityTypeConfiguration<Transport>, TransportConfiguration>();
+            services.AddScoped<IEntityTypeConfiguration<User>, UserConfiguration>();
+
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

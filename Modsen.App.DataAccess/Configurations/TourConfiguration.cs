@@ -4,7 +4,7 @@ using Modsen.App.Core.Models;
 
 namespace Modsen.App.DataAccess.Configurations
 {
-	class TourConfiguration : IEntityTypeConfiguration<Tour>
+    public class TourConfiguration : IEntityTypeConfiguration<Tour>
     {
         public void Configure(EntityTypeBuilder<Tour> builder)
         {
@@ -13,10 +13,10 @@ namespace Modsen.App.DataAccess.Configurations
 
             builder.Property(p => p.Name).IsRequired().HasMaxLength(15);
             builder.Property(p => p.Price).IsRequired().HasMaxLength(12);
-            builder.Property(p => p.Start).IsRequired();
+            //builder.Property(p => p.Start).IsRequired();
             //Is p.End actually required?
-            builder.Property(p => p.TourType).IsRequired();
-            builder.Property(p => p.Transport).IsRequired();
+            //builder.Property(p => p.TourType).IsRequired();
+           // builder.Property(p => p.Transport).IsRequired();
             //p.Description Is not required
         }
     }
