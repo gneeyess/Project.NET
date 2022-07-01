@@ -1,3 +1,4 @@
+using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Modsen.App.Core.Mapping;
 using Modsen.App.Core.Models;
+using Modsen.App.Core.Validators;
 using Modsen.App.DataAccess.Abstractions;
 using Modsen.App.DataAccess.Configurations;
 using Modsen.App.DataAccess.Data;
@@ -50,7 +52,12 @@ namespace Modsen.App.WebHost
             services.AddScoped<IEntityTypeConfiguration<TourType>, TourTypeConfiguration>();
             services.AddScoped<IEntityTypeConfiguration<Transport>, TransportConfiguration>();
             services.AddScoped<IEntityTypeConfiguration<User>, UserConfiguration>();
-
+            //fluent validation
+            services.AddScoped<IValidator<Booking>, BookingValidator>();
+            services.AddScoped<IValidator<Tour>, TourValidator>();
+            services.AddScoped<IValidator<TourType>, TourTypeValidator>();
+            services.AddScoped<IValidator<Transport>, TransportValidator>();
+            services.AddScoped<IValidator<User>, UserValidator>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
