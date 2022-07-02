@@ -12,18 +12,21 @@ namespace Modsen.App.DataAccess.Repositories
         private readonly IRepository<TourType> _tourTypeRepository;
         private readonly IRepository<Transport> _transportRepository;
         private readonly IRepository<User> _userRepository;
+        private readonly IRepository<UserRole> _userRoleRepository;
 
         public UnitOfWork(IRepository<Booking> bookingRepository,
             IRepository<Tour> tourRepository,
             IRepository<TourType> tourTypeRepository,
             IRepository<Transport> transportRepository,
-            IRepository<User> userRepository)
+            IRepository<User> userRepository,
+            IRepository<UserRole> userRoleRepository)
         {
             _bookingRepository = bookingRepository;
             _tourRepository = tourRepository;
             _tourTypeRepository = tourTypeRepository;
             _transportRepository = transportRepository;
             _userRepository = userRepository;
+            _userRoleRepository = userRoleRepository;
         }
 
         public EFBookingRepository BookingRepository => (EFBookingRepository)_bookingRepository;
@@ -36,7 +39,9 @@ namespace Modsen.App.DataAccess.Repositories
 
         public EFUserRepository UserRepository => (EFUserRepository)_userRepository;
 
-        public void Dispose()
+        public EFUserRoleRepository UserRoleRepository => (EFUserRoleRepository)_userRoleRepository;
+
+    public void Dispose()
         {
             GC.SuppressFinalize(this);
         }

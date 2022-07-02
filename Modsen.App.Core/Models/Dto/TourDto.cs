@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Modsen.App.Core.Models
+namespace Modsen.App.Core.Models.Dto
 {
-    public class Tour : Abstractions.BaseEntity
+    //Do I write this file correct?    
+
+    public class TourDto 
     {
         public string Name { get; set; }
 
@@ -15,19 +17,10 @@ namespace Modsen.App.Core.Models
 
         public int Price { get; set; }
 
-        // foreign keys
-
         public virtual TourType TourType { get; set; }
 
         public virtual Transport Transport { get; set; }
 
-        // connection with Booking model
-
         public virtual ICollection<Booking> Bookings { get; set; }
-
-        public Tour()
-        {
-            Bookings = new List<Booking>();
-        }
     }
 }

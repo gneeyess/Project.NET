@@ -64,18 +64,21 @@ namespace Modsen.App.WebHost
             services.AddScoped<IRepository<TourType>, EFTourTypeRepository>();
             services.AddScoped<IRepository<Transport>, EFTransportRepository>();
             services.AddScoped<IRepository<User>, EFUserRepository>();
+            services.AddScoped<IRepository<UserRole>, EFUserRoleRepository>();
             //fluent api
             services.AddScoped<IEntityTypeConfiguration<Booking>, BookingConfiguration>();
             services.AddScoped<IEntityTypeConfiguration<Tour>, TourConfiguration>();
             services.AddScoped<IEntityTypeConfiguration<TourType>, TourTypeConfiguration>();
             services.AddScoped<IEntityTypeConfiguration<Transport>, TransportConfiguration>();
             services.AddScoped<IEntityTypeConfiguration<User>, UserConfiguration>();
+            services.AddScoped<IEntityTypeConfiguration<UserRole>, UserRoleConfiguration>();
             //fluent validation
             services.AddScoped<IValidator<Booking>, BookingValidator>();
             services.AddScoped<IValidator<Tour>, TourValidator>();
             services.AddScoped<IValidator<TourType>, TourTypeValidator>();
             services.AddScoped<IValidator<Transport>, TransportValidator>();
             services.AddScoped<IValidator<User>, UserValidator>();
+            services.AddScoped<IValidator<UserRole>, UserRoleValidator>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

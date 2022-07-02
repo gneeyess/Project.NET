@@ -8,6 +8,8 @@ namespace Modsen.App.Core.Validators
     {
         public UserValidator()
         {
+            //Нужно ли Rule для id?
+
             RuleFor(user => user.Email).NotEmpty();
             RuleFor(user => user.FirstName).NotEmpty(); 
             RuleFor(user => user.LastName).NotEmpty();

@@ -11,6 +11,5 @@ namespace Modsen.App.Core.Validators
             RuleFor(booking => booking.Tour).NotNull();
             RuleFor(booking => booking.User).NotNull();
         }
-
     }
 }

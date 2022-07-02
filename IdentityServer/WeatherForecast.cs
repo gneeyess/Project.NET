@@ -2,6 +2,8 @@ using System;
 
 namespace IdentityServer
 {
+    //Do we need to delete it? #2
+
     public class WeatherForecast
     {
         public DateTime Date { get; set; }

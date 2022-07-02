@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace IdentityServer.Controllers
 {
+    //Do we need to delete it?
+
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
