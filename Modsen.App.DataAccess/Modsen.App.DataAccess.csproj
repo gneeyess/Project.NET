@@ -11,6 +11,7 @@
   <ItemGroup>
     <Folder Include="Abstractions\" />
     <Folder Include="Data\" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
