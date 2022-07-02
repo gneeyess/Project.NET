@@ -1,3 +1,4 @@
+using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -14,6 +15,8 @@ using Modsen.App.DataAccess.Configurations;
 using Modsen.App.DataAccess.Data;
 using Modsen.App.DataAccess.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Modsen.App.Core.Services;
+using Modsen.App.WebHost.Services;
 
 
 namespace Modsen.App.WebHost
@@ -58,6 +61,14 @@ namespace Modsen.App.WebHost
                     c => c.MigrationsAssembly(typeof(Startup).Assembly.FullName));
                 optionsAction.UseLazyLoadingProxies();
             });
+
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new UserMapper());
+            });
+            var mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
             //repositories
             services.AddScoped<IRepository<Booking>, EFBookingRepository>();
             services.AddScoped<IRepository<Tour>, EFTourRepository>();
@@ -79,10 +90,12 @@ namespace Modsen.App.WebHost
             services.AddScoped<IValidator<Transport>, TransportValidator>();
             services.AddScoped<IValidator<User>, UserValidator>();
             services.AddScoped<IValidator<UserRole>, UserRoleValidator>();
+            //services
+            services.AddScoped<IUserService, UserService>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddAutoMapper(typeof(UserMapper));
+            
 
             services.AddScoped<IDBInitializer, EFDBInitiliazer>();
         }

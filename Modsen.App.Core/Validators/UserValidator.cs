@@ -10,7 +10,7 @@ namespace Modsen.App.Core.Validators
         {
             //Нужно ли Rule для id?
 
-            RuleFor(user => user.Email).NotEmpty();
+            RuleFor(user => user.Email).EmailAddress();
             RuleFor(user => user.FirstName).NotEmpty(); 
             RuleFor(user => user.LastName).NotEmpty();
             RuleFor(user => user.Phone).NotEmpty();
