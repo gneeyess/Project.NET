@@ -11,12 +11,11 @@ namespace Modsen.App.Core.Validators
             RuleFor(tourType => tourType.Name).NotEmpty();
             RuleFor(tourType => tourType.Tours).NotNull().Must(IsValidTours);
         }
-
         private bool IsValidTours(ICollection<Tour> tours)
         {
             throw new System.NotImplementedException();
+            
+            //Он же выбросит исключение в любом случае ??
         }
-
-
     }
 }

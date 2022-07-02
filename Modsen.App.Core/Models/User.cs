@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Modsen.App.Core.Models
 {
@@ -12,13 +13,12 @@ namespace Modsen.App.Core.Models
 
         public string Phone { get; set; }
 
-        // hash of the password
+        // hash of the password // ?
         public string Password { get; set; }
-        public string RepeatPassword { get; set; }
 
-        // false-user, true-admin
-        // Может тут лучше использовать не bool?
-        public bool Role { get; set; }
+        public string RepeatPassword { get; set; } //Он точно должен быть здесь?
+
+        public virtual UserRole Roles { get; set; }
 
         // connection with Booking model
         public virtual ICollection<Booking> Bookings { get; set; }

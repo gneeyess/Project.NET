@@ -16,5 +16,7 @@ namespace Modsen.App.DataAccess.Data
         public static ICollection<Transport> Transports = new List<Transport>();
 
         public static ICollection<User> Users = new List<User>();
+
+        public static ICollection<UserRole> UserRoles = new List<UserRole>();
     }
 }

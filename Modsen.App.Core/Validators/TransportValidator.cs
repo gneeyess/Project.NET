@@ -5,7 +5,6 @@ using Modsen.App.Core.Models;
 namespace Modsen.App.Core.Validators
 {
     public class TransportValidator : AbstractValidator<Transport>
-
     {
         public TransportValidator()
         {
