@@ -42,6 +42,11 @@ namespace IdentityServer
                     RedirectUris = { "https://localhost:5001/signin-oidc" }
                 }
             };
+        public static IEnumerable<ApiScope> GetApiScopes() =>
+            new List<ApiScope>
+            {
+                new ApiScope("TestAPI")
+            };
 
         public static IEnumerable<ApiResource> GetApiResources() =>
             new List<ApiResource>
