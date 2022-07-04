@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modsen.App.API", "Modsen.App.WebHost\Modsen.App.API.csproj", "{A8ABEEF1-443E-461C-B337-6179D49D91C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modsen.App.API", "Modsen.App.API\Modsen.App.API.csproj", "{A8ABEEF1-443E-461C-B337-6179D49D91C0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modsen.App.Core", "Modsen.App.Core\Modsen.App.Core.csproj", "{3D9D9C62-B2A4-4541-BEE3-5F7731C14E88}"
 EndProject
