@@ -1,6 +1,8 @@
-﻿namespace Modsen.App.WebHost.Services
+﻿using Modsen.App.Core.Services;
+
+namespace Modsen.App.WebHost.Services
 {
-    public class BookingService
+    public class BookingService : IBookingService
     {
         
     }

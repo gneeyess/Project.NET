@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Modsen.App.Core.Models;
@@ -9,8 +10,8 @@ namespace Modsen.App.DataAccess.Repositories
 {
     public class EFTourTypeRepository : IRepository<TourType>
     {
-        private ApplicationContext _context;
-        private DbSet<TourType> _dbSet;
+        private readonly ApplicationContext _context;
+        private readonly DbSet<TourType> _dbSet;
 
         public EFTourTypeRepository(ApplicationContext context)
         {
@@ -18,12 +19,17 @@ namespace Modsen.App.DataAccess.Repositories
             _dbSet = _context.Set<TourType>();
         }
 
-        public async Task AddAsync(TourType tourType)
+        public async Task<TourType> GetByIdAsync(int id)
         {
-            await _dbSet.AddAsync(tourType);
-            await _context.SaveChangesAsync();
+            return await _dbSet.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<IEnumerable<TourType>> GetQueueAsync(int offset, int size)
+        {
+            var result = await _dbSet.AsNoTracking().Skip(offset * size).Take(size).ToListAsync();
+
+            return result;
+        }
         public async Task DeleteAsync(int id)
         {
             var item = await _dbSet.FindAsync(id);
@@ -34,21 +40,15 @@ namespace Modsen.App.DataAccess.Repositories
                 await _context.SaveChangesAsync();
             }
         }
-
-        public async Task<IEnumerable<TourType>> GetAllAsync()
-        {
-            return await _dbSet.ToListAsync();
-        }
-
-        public async Task<TourType> GetByIdAsync(int id)
-        {
-            return await _dbSet.FindAsync(id);
-        }
-
         public async Task UpdateAsync(TourType tourType)
         {
             _dbSet.Update(tourType);
 
+            await _context.SaveChangesAsync();
+        }
+        public async Task AddAsync(TourType tourType)
+        {
+            await _dbSet.AddAsync(tourType);
             await _context.SaveChangesAsync();
         }
     }

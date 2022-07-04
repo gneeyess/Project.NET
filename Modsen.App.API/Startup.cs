@@ -86,7 +86,7 @@ namespace Modsen.App.WebHost
             services.AddScoped<IEntityTypeConfiguration<UserRole>, UserRoleConfiguration>();
            
             //services
-            services.AddScoped<IUserService, UserService>();
+            
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
