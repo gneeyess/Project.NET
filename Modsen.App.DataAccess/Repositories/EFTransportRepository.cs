@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Modsen.App.Core.Models;
@@ -9,8 +10,8 @@ namespace Modsen.App.DataAccess.Repositories
 {
     public class EFTransportRepository : IRepository<Transport>
     {
-        private ApplicationContext _context;
-        private DbSet<Transport> _dbSet;
+        private readonly ApplicationContext _context;
+        private readonly DbSet<Transport> _dbSet;
 
         public EFTransportRepository(ApplicationContext context)
         {
@@ -18,12 +19,17 @@ namespace Modsen.App.DataAccess.Repositories
             _dbSet = _context.Set<Transport>();
         }
 
-        public async Task AddAsync(Transport transport)
+        public async Task<Transport> GetByIdAsync(int id)
         {
-            await _dbSet.AddAsync(transport);
-            await _context.SaveChangesAsync();
+            return await _dbSet.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<IEnumerable<Transport>> GetQueueAsync(int offset, int size)
+        {
+            var result = await _dbSet.AsNoTracking().Skip(offset * size).Take(size).ToListAsync();
+
+            return result;
+        }
         public async Task DeleteAsync(int id)
         {
             var item = await _dbSet.FindAsync(id);
@@ -34,21 +40,15 @@ namespace Modsen.App.DataAccess.Repositories
                 await _context.SaveChangesAsync();
             }
         }
-
-        public async Task<IEnumerable<Transport>> GetAllAsync()
-        {
-            return await _dbSet.ToListAsync();
-        }
-
-        public async Task<Transport> GetByIdAsync(int id)
-        {
-            return await _dbSet.FindAsync(id);
-        }
-
         public async Task UpdateAsync(Transport transport)
         {
             _dbSet.Update(transport);
 
+            await _context.SaveChangesAsync();
+        }
+        public async Task AddAsync(Transport transport)
+        {
+            await _dbSet.AddAsync(transport);
             await _context.SaveChangesAsync();
         }
     }
