@@ -11,6 +11,6 @@ namespace Modsen.App.DataAccess.Abstractions
         public Task DeleteAsync(int id);
         public Task UpdateAsync(T item);
         public Task<T> GetByIdAsync(int id);
-        public Task<IEnumerable<T>> GetAllAsync();
+        public Task<IEnumerable<T>> GetQueueAsync(int offset, int size);
     }
 }

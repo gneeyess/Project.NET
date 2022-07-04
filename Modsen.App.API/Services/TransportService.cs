@@ -1,7 +1,11 @@
-﻿namespace Modsen.App.WebHost.Services
+﻿using Modsen.App.Core.Services;
+
+namespace Modsen.App.WebHost.Services
 {
-    public class TransportService
+    public class TransportService : ITransportService
+
     {
         
+
     }
 }

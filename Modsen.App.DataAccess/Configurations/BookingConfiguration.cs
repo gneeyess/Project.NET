@@ -11,6 +11,7 @@ namespace Modsen.App.DataAccess.Configurations
             builder.HasKey(booking => booking.Id);
             builder.HasIndex(booking => booking.Id).IsUnique();
 
+
             //builder.Property(p => p.Date).IsRequired();
             //builder.Property(p => p.Tour).IsRequired();
             //builder.Property(p => p.User).IsRequired();

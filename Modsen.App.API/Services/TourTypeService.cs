@@ -1,7 +1,10 @@
-﻿namespace Modsen.App.WebHost.Services
+﻿using Modsen.App.Core.Services;
+
+namespace Modsen.App.WebHost.Services
 {
-    public class TourTypeService
+    public class TourTypeService : ITourTypeService
+
     {
-        
+
     }
 }

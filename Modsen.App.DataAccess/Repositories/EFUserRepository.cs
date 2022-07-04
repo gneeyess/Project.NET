@@ -9,47 +9,30 @@ namespace Modsen.App.DataAccess.Repositories
 {
     public class EFUserRepository : IRepository<User>
     {
-        private ApplicationContext _context;
-        private DbSet<User> _dbSet;
 
-        public EFUserRepository(ApplicationContext context)
+        public Task AddAsync(User item)
         {
-            _context = context;
-            _dbSet = _context.Set<User>();
+            throw new System.NotImplementedException();
         }
 
-        public async Task AddAsync(User user)
+        public Task DeleteAsync(int id)
         {
-            await _dbSet.AddAsync(user);
-            await _context.SaveChangesAsync();
+            throw new System.NotImplementedException();
         }
 
-        public async Task DeleteAsync(int id)
+        public Task<User> GetByIdAsync(int id)
         {
-            var item = await _dbSet.FindAsync(id);
-
-            if (item != null)
-            {
-                _dbSet.Remove(item);
-                await _context.SaveChangesAsync();
-            }
+            throw new System.NotImplementedException();
         }
 
-        public async Task<IEnumerable<User>> GetAllAsync()
+        public Task<IEnumerable<User>> GetQueueAsync(int offset, int size)
         {
-            return await _dbSet.ToListAsync();
+            throw new System.NotImplementedException();
         }
 
-        public async Task<User> GetByIdAsync(int id)
+        public Task UpdateAsync(User item)
         {
-            return await _dbSet.FindAsync(id);
-        }
-
-        public async Task UpdateAsync(User user)
-        {
-            _dbSet.Update(user);
-
-            await _context.SaveChangesAsync();
+            throw new System.NotImplementedException();
         }
     }
 }
