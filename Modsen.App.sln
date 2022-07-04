@@ -9,6 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modsen.App.Core", "Modsen.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modsen.App.DataAccess", "Modsen.App.DataAccess\Modsen.App.DataAccess.csproj", "{B62D84E7-1E53-4536-9825-5ED89B78C11C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{F6CEA5E1-F3D0-4D3D-A740-FB14DAD3CE8A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{DD54EDC2-3A1C-4271-958A-A5E0D061FC80}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityServer", "IdentityServer", "{D084F28F-F5D7-4789-A120-D30BE2915CD5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +36,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A8ABEEF1-443E-461C-B337-6179D49D91C0} = {DD54EDC2-3A1C-4271-958A-A5E0D061FC80}
+		{DD54EDC2-3A1C-4271-958A-A5E0D061FC80} = {F6CEA5E1-F3D0-4D3D-A740-FB14DAD3CE8A}
+		{D084F28F-F5D7-4789-A120-D30BE2915CD5} = {F6CEA5E1-F3D0-4D3D-A740-FB14DAD3CE8A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {266537A9-6DDB-4890-88C0-F5A2E15A8A1B}
