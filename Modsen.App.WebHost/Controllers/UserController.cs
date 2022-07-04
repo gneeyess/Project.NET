@@ -40,7 +40,7 @@ namespace Modsen.App.WebHost.Controllers
         {
             await _userService.AddUserAsync(user);
         }
-        [HttpPost("edit")]
+        [HttpPut("edit")]
         public async Task EditASync([FromForm] User user)
         {
             await _userService.UpdateUserAsync(user);

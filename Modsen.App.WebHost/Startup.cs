@@ -68,7 +68,8 @@ namespace Modsen.App.WebHost
             });
             var mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
-
+      
+            services.AddValidatorsFromAssemblyContaining<BookingValidator>();
             //repositories
             services.AddScoped<IRepository<Booking>, EFBookingRepository>();
             services.AddScoped<IRepository<Tour>, EFTourRepository>();
@@ -83,13 +84,7 @@ namespace Modsen.App.WebHost
             services.AddScoped<IEntityTypeConfiguration<Transport>, TransportConfiguration>();
             services.AddScoped<IEntityTypeConfiguration<User>, UserConfiguration>();
             services.AddScoped<IEntityTypeConfiguration<UserRole>, UserRoleConfiguration>();
-            //fluent validation
-            services.AddScoped<IValidator<Booking>, BookingValidator>();
-            services.AddScoped<IValidator<Tour>, TourValidator>();
-            services.AddScoped<IValidator<TourType>, TourTypeValidator>();
-            services.AddScoped<IValidator<Transport>, TransportValidator>();
-            services.AddScoped<IValidator<User>, UserValidator>();
-            services.AddScoped<IValidator<UserRole>, UserRoleValidator>();
+           
             //services
             services.AddScoped<IUserService, UserService>();
 

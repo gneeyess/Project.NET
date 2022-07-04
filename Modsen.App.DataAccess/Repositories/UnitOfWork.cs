@@ -1,11 +1,10 @@
-﻿using System;
-using Modsen.App.Core.Models;
+﻿using Modsen.App.Core.Models;
 using Modsen.App.DataAccess.Abstractions;
-using Modsen.App.DataAccess.Data;
+using System;
 
 namespace Modsen.App.DataAccess.Repositories
 {
-    public class UnitOfWork : IUnitOfWork, IDisposable
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly IRepository<Booking> _bookingRepository;
         private readonly IRepository<Tour> _tourRepository;
@@ -41,9 +40,5 @@ namespace Modsen.App.DataAccess.Repositories
 
         public EFUserRoleRepository UserRoleRepository => (EFUserRoleRepository)_userRoleRepository;
 
-    public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-        }
     }
 }
