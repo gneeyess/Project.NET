@@ -34,20 +34,20 @@ namespace Modsen.App.WebHost
         public void ConfigureServices(IServiceCollection services)
         {
 
-            //services.AddAuthentication(config =>
-            //{
-            //    config.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            //    config.DefaultChallengeScheme = "oidc";
-            //})
-            //    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
-            //    .AddOpenIdConnect("oidc", config =>
-            //    {
-            //        config.Authority = "https://localhost:10001";
-            //        config.ClientId = "client_id_test";
-            //        config.ClientSecret = "client_secret_test";
-            //        config.SaveTokens = true;
-            //        config.ResponseType = "code";
-            //    });
+            services.AddAuthentication(config =>
+            {
+                config.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                config.DefaultChallengeScheme = "oidc";
+            })
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddOpenIdConnect("oidc", config =>
+                {
+                    config.Authority = "https://localhost:10001";
+                    config.ClientId = "client_id";
+                    config.ClientSecret = "client_secret";
+                    config.SaveTokens = true;
+                    config.ResponseType = "code";
+                });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -95,27 +95,25 @@ namespace Modsen.App.WebHost
             services.AddScoped<IDBInitializer, EFDBInitiliazer>();
         }
 
-        private void ConfigureAuthService(IServiceCollection services)
-        {
-            // prevent from mapping "sub" claim to nameidentifier.
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
+        //private void ConfigureAuthService(IServiceCollection services)
+        //{
+        //    // prevent from mapping "sub" claim to nameidentifier.
+        //    JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
 
-            var identityUrl = Configuration.GetValue<string>("IdentityUrl");
+        //    var identityUrl = Configuration.GetValue<string>("IdentityUrl");
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = "oidc";
-                //options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                //options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        //    services.AddAuthentication(options =>
+        //    {
+        //        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        //        options.DefaultChallengeScheme = "oidc";
 
-            }).AddJwtBearer(options =>
-            {
-                options.Authority = "https://localhost:10001";
-                options.RequireHttpsMetadata = false;
-                options.Audience = "AppAPI";
-            });
-        }
+        //    }).AddJwtBearer(options =>
+        //    {
+        //        options.Authority = "https://localhost:10001";
+        //        options.RequireHttpsMetadata = false;
+        //        options.Audience = "TestAPI";
+        //    });
+        //}
 
         protected virtual void ConfigureAuth(IApplicationBuilder app)
         {
