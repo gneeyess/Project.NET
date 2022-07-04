@@ -6,6 +6,8 @@ namespace Modsen.App.DataAccess.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
+        // DELETE ME ?
+
         private readonly IRepository<Booking> _bookingRepository;
         private readonly IRepository<Tour> _tourRepository;
         private readonly IRepository<TourType> _tourTypeRepository;
