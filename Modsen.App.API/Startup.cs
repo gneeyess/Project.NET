@@ -17,7 +17,7 @@ using Modsen.App.DataAccess.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Modsen.App.Core.Services;
 using Modsen.App.WebHost.Services;
-
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Modsen.App.WebHost
 {
@@ -43,8 +43,8 @@ namespace Modsen.App.WebHost
                 .AddOpenIdConnect("oidc", config =>
                 {
                     config.Authority = "https://localhost:10001";
-                    config.ClientId = "client_id_test";
-                    config.ClientSecret = "client_secret_test";
+                    config.ClientId = "client_id";
+                    config.ClientSecret = "client_secret";
                     config.SaveTokens = true;
                     config.ResponseType = "code";
                 });
@@ -93,6 +93,32 @@ namespace Modsen.App.WebHost
             
 
             services.AddScoped<IDBInitializer, EFDBInitiliazer>();
+        }
+
+        //private void ConfigureAuthService(IServiceCollection services)
+        //{
+        //    // prevent from mapping "sub" claim to nameidentifier.
+        //    JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
+
+        //    var identityUrl = Configuration.GetValue<string>("IdentityUrl");
+
+        //    services.AddAuthentication(options =>
+        //    {
+        //        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+        //        options.DefaultChallengeScheme = "oidc";
+
+        //    }).AddJwtBearer(options =>
+        //    {
+        //        options.Authority = "https://localhost:10001";
+        //        options.RequireHttpsMetadata = false;
+        //        options.Audience = "TestAPI";
+        //    });
+        //}
+
+        protected virtual void ConfigureAuth(IApplicationBuilder app)
+        {
+            app.UseAuthentication();
+            app.UseAuthorization();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
