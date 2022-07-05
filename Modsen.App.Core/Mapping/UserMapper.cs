@@ -8,7 +8,7 @@ namespace Modsen.App.Core.Mapping
     {
         public UserMapper()
         {
-            CreateMap<User, UserDto>();
+          //  CreateMap<User, UserDto>();
         }
     }
 }

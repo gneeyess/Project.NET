@@ -1,14 +1,11 @@
-﻿using Modsen.App.Core.Models;
-using Modsen.App.DataAccess.Repositories;
+﻿using Modsen.App.DataAccess.Repositories;
 
-namespace Modsen.App.DataAccess.Abstractions
+namespace Modsen.App.DataAccess.Abstractions;
+
+public interface IUnitOfWork
 {
-    public interface IUnitOfWork
-    {
-        public EFBookingRepository BookingRepository { get; }
-        public EFTourRepository TourRepository { get; }
-        public EFTourTypeRepository TourTypeRepository { get; }
-        public EFTransportRepository TransportRepository { get; }
-        public EFUserRepository UserRepository { get; }
-    }
+    public BookingRepository BookingRepository { get; }
+    public TourRepository TourRepository { get; }
+    public TourTypeRepository TourTypeRepository { get; }
+    public TransportRepository TransportRepository { get; }
 }

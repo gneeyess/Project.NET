@@ -1,22 +1,20 @@
-﻿using Modsen.App.Core.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Dal.Entities;
+using Dal.Entities.Identity;
 
-namespace Modsen.App.DataAccess.Data
+namespace Modsen.App.DataAccess.Data;
+
+public static class FakeData
 {
-    public static class FakeData
-    {
-        //Будет заменена на SQL
+    //Будет заменена на SQL
 
-        public static ICollection<Booking> Bookings = new List<Booking>();
+    public static ICollection<Booking> Bookings = new List<Booking>();
 
-        public static ICollection<Tour> Tours = new List<Tour>();
+    public static ICollection<Tour> Tours = new List<Tour>();
 
-        public static ICollection<TourType> TourTypes = new List<TourType>();
+    public static ICollection<TourType> TourTypes = new List<TourType>();
 
-        public static ICollection<Transport> Transports = new List<Transport>();
+    public static ICollection<Transport> Transports = new List<Transport>();
 
-        public static ICollection<User> Users = new List<User>();
-
-        public static ICollection<UserRole> UserRoles = new List<UserRole>();
-    }
+    public static ICollection<User> Users = new List<User>();
 }
