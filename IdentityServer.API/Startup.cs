@@ -1,3 +1,5 @@
+using Dal.Entities.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 
 namespace IdentityServer
@@ -7,15 +9,20 @@ namespace IdentityServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddIdentity<User, IdentityRole<int>>()
+                .AddDefaultTokenProviders();
+
             services.AddIdentityServer(options =>
-            {
-                options.UserInteraction.LoginUrl = "/Account/Login";
-            })
+                {
+                    options.UserInteraction.LoginUrl = "/Account/Login";
+                })
                 .AddInMemoryClients(Configuration.GetClients())
                 .AddInMemoryApiResources(Configuration.GetApiResources())
                 .AddInMemoryIdentityResources(Configuration.GetIdentityResources())
                 .AddInMemoryApiScopes(Configuration.GetApiScopes())
-                .AddDeveloperSigningCredential();
+                .AddDeveloperSigningCredential()
+                .AddAspNetIdentity<User>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

@@ -1,4 +1,7 @@
+using System.IdentityModel.Tokens.Jwt;
 using AutoMapper;
+using Dal.Entities;
+using Dal.Entities.Identity;
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,18 +11,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Modsen.App.Core.Mapping;
-using Modsen.App.Core.Models;
-using Modsen.App.Core.Validators;
 using Modsen.App.DataAccess.Abstractions;
 using Modsen.App.DataAccess.Configurations;
 using Modsen.App.DataAccess.Data;
 using Modsen.App.DataAccess.Repositories;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Modsen.App.Core.Services;
-using Modsen.App.WebHost.Services;
-using System.IdentityModel.Tokens.Jwt;
 
-namespace Modsen.App.WebHost
+namespace Modsen.App.API
 {
     public class Startup
     {
@@ -33,27 +30,14 @@ namespace Modsen.App.WebHost
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddAuthentication(config =>
-            {
-                config.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                config.DefaultChallengeScheme = "oidc";
-            })
-                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddOpenIdConnect("oidc", config =>
-                {
-                    config.Authority = "https://localhost:10001";
-                    config.ClientId = "client_id";
-                    config.ClientSecret = "client_secret";
-                    config.SaveTokens = true;
-                    config.ResponseType = "code";
-                });
-
             services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Modsen.App", Version = "v1" });
             });
+
+            services.ConfigureAuthService(Configuration);
 
             services.AddDbContext<ApplicationContext>(optionsAction =>
             {
@@ -68,52 +52,19 @@ namespace Modsen.App.WebHost
             });
             var mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
-      
-            services.AddValidatorsFromAssemblyContaining<BookingValidator>();
+
+       //     services.AddValidatorsFromAssemblyContaining<BookingValidator>();
             //repositories
-            services.AddScoped<IRepository<Booking>, EFBookingRepository>();
-            services.AddScoped<IRepository<Tour>, EFTourRepository>();
-            services.AddScoped<IRepository<TourType>, EFTourTypeRepository>();
-            services.AddScoped<IRepository<Transport>, EFTransportRepository>();
-            services.AddScoped<IRepository<User>, EFUserRepository>();
-            services.AddScoped<IRepository<UserRole>, EFUserRoleRepository>();
-            //fluent api
-            services.AddScoped<IEntityTypeConfiguration<Booking>, BookingConfiguration>();
-            services.AddScoped<IEntityTypeConfiguration<Tour>, TourConfiguration>();
-            services.AddScoped<IEntityTypeConfiguration<TourType>, TourTypeConfiguration>();
-            services.AddScoped<IEntityTypeConfiguration<Transport>, TransportConfiguration>();
-            services.AddScoped<IEntityTypeConfiguration<User>, UserConfiguration>();
-            services.AddScoped<IEntityTypeConfiguration<UserRole>, UserRoleConfiguration>();
-           
+            services.AddScoped<IRepository<Booking>, BookingRepository>();
+            services.AddScoped<IRepository<Tour>, TourRepository>();
+            services.AddScoped<IRepository<TourType>, TourTypeRepository>();
+            services.AddScoped<IRepository<Transport>, TransportRepository>();
+         
+
             //services
-            
-
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            
-
             services.AddScoped<IDBInitializer, EFDBInitiliazer>();
         }
-
-        //private void ConfigureAuthService(IServiceCollection services)
-        //{
-        //    // prevent from mapping "sub" claim to nameidentifier.
-        //    JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
-
-        //    var identityUrl = Configuration.GetValue<string>("IdentityUrl");
-
-        //    services.AddAuthentication(options =>
-        //    {
-        //        options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-        //        options.DefaultChallengeScheme = "oidc";
-
-        //    }).AddJwtBearer(options =>
-        //    {
-        //        options.Authority = "https://localhost:10001";
-        //        options.RequireHttpsMetadata = false;
-        //        options.Audience = "TestAPI";
-        //    });
-        //}
 
         protected virtual void ConfigureAuth(IApplicationBuilder app)
         {
@@ -149,6 +100,27 @@ namespace Modsen.App.WebHost
             });
 
             dbInitializer.Initialize();
+        }
+    }
+
+    static class CustomExtensionsMethods
+    {
+        public static void ConfigureAuthService(this IServiceCollection services, IConfiguration configuration)
+        {
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
+
+            var identityUrl = configuration.GetValue<string>("IdentityUrl");
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = "Bearer";
+                options.DefaultChallengeScheme = "Bearer";
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = identityUrl;
+                options.RequireHttpsMetadata = false;
+                options.Audience = "api";
+            });
         }
     }
 }

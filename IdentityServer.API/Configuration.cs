@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using IdentityModel;
+﻿using IdentityModel;
 using IdentityServer4.Models;
 using IdentityServer4;
 
@@ -12,53 +11,38 @@ namespace IdentityServer
             {
                 new Client
                 {
-                    ClientId = "client_id",
-
+                    ClientId = "Api",
+                    ClientName = "Api",
                     ClientSecrets = { new Secret("client_secret".ToSha256())},
-
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-
                     AllowedScopes =
                     {
-                        "TestAPI"
-                    }
-                },
-                new Client
-                {
-                    ClientId = "client_id_test",
-
-                    ClientSecrets = { new Secret("client_secret_test".ToSha256())},
-
-                    AllowedGrantTypes = GrantTypes.Code,
-
-                    AllowedScopes =
-                    {
-                        "TestAPI",
                         IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile
-
-                    },
-
-                    RedirectUris = { "https://localhost:5001/signin-oidc" }
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "api"
+                    }
                 }
             };
+
         public static IEnumerable<ApiScope> GetApiScopes() =>
             new List<ApiScope>
             {
-                new ApiScope("TestAPI")
+                new ApiScope("api", "api")
             };
 
         public static IEnumerable<ApiResource> GetApiResources() =>
             new List<ApiResource>
             {
-                new ApiResource("TestAPI")
+                new("api", "api") {Scopes = new List<string>{"api"}}
             };
 
         public static IEnumerable<IdentityResource> GetIdentityResources() =>
             new List<IdentityResource>
             {
                 new IdentityResources.OpenId(),
-                new IdentityResources.Profile()
+                new IdentityResources.Profile(),
+                new IdentityResources.Email()
 
             };
     }
