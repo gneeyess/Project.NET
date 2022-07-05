@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Modsen.App.Core.Models;
+﻿using Modsen.App.Core.Models;
 using Modsen.App.DataAccess.Abstractions;
-using Modsen.App.DataAccess.Data;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Modsen.App.DataAccess.Repositories
 {
@@ -15,12 +14,12 @@ namespace Modsen.App.DataAccess.Repositories
             throw new System.NotImplementedException();
         }
 
-        public Task DeleteAsync(int id)
+        public Task DeleteAsync(Guid id)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<User> GetByIdAsync(int id)
+        public Task<User> GetByIdAsync(Guid id)
         {
             throw new System.NotImplementedException();
         }
