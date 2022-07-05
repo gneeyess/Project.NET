@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace Modsen.App.DataAccess.Repositories
             _dbSet = _context.Set<UserRole>();
         }
 
-        public async Task<UserRole> GetByIdAsync(int id)
+        public async Task<UserRole> GetByIdAsync(Guid id)
         {
             return await _dbSet.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
@@ -31,7 +32,7 @@ namespace Modsen.App.DataAccess.Repositories
 
             return result;
         }
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(Guid id)
         {
             var item = await _dbSet.FindAsync(id);
 

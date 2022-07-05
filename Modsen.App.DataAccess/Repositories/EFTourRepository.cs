@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Modsen.App.Core.Models;
 using Modsen.App.DataAccess.Abstractions;
 using Modsen.App.DataAccess.Data;
@@ -19,7 +20,7 @@ namespace Modsen.App.DataAccess.Repositories
             _dbSet = _context.Set<Tour>();
         }
 
-        public async Task<Tour> GetByIdAsync(int id)
+        public async Task<Tour> GetByIdAsync(Guid id)
         {
             return await _dbSet.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
@@ -30,7 +31,7 @@ namespace Modsen.App.DataAccess.Repositories
 
             return result;
         }
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(Guid id)
         {
             var item = await _dbSet.FindAsync(id);
 

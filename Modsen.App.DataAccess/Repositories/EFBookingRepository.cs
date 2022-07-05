@@ -1,4 +1,5 @@
-﻿using Modsen.App.Core.Models;
+﻿using System;
+using Modsen.App.Core.Models;
 using Modsen.App.DataAccess.Abstractions;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Modsen.App.DataAccess.Repositories
             _context = context;
             _dbSet = _context.Set<Booking>();
         }
-        public async Task<Booking> GetByIdAsync(int id)
+        public async Task<Booking> GetByIdAsync(Guid id)
         {
             return await _dbSet.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
@@ -29,7 +30,7 @@ namespace Modsen.App.DataAccess.Repositories
 
             return result;
         }
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(Guid id)
         {
             var item = await _dbSet.FindAsync(id);
 
