@@ -1,10 +1,11 @@
 ﻿using IdentityModel;
-using IdentityServer4.Models;
 using IdentityServer4;
+using IdentityServer4.Models;
+using IdentityServer4.Test;
 
 namespace IdentityServer
 {
-    public static class Configurations
+    public static class IdentityServerConfiguration
     {
         public static IEnumerable<Client> GetClients() =>
             new List<Client>
@@ -14,7 +15,7 @@ namespace IdentityServer
                     ClientId = "Api",
                     ClientName = "Api",
                     ClientSecrets = { new Secret("client_secret".ToSha256())},
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
@@ -44,6 +45,17 @@ namespace IdentityServer
                 new IdentityResources.Profile(),
                 new IdentityResources.Email()
 
+            };
+
+        public static List<TestUser> GeTestUsers() =>
+            new List<TestUser>
+            {
+                new TestUser
+                {
+                    SubjectId = "1",
+                    Username = "111",
+                    Password = "aaa"
+                }
             };
     }
 }

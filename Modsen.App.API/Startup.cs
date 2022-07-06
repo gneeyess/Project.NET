@@ -38,8 +38,8 @@ namespace Modsen.App.API
 
             services.ConfigureAuthService(Configuration);
 
-            services.AddIdentity<User, IdentityRole<int>>()
-                .AddEntityFrameworkStores<ApplicationContext>();
+            //services.AddIdentity<User, IdentityRole<int>>()
+            //    .AddEntityFrameworkStores<ApplicationContext>();
 
 
             services.AddDbContext<ApplicationContext>(optionsAction =>

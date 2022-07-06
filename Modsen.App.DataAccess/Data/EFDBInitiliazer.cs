@@ -59,5 +59,8 @@ public class EFDBInitiliazer : IDBInitializer
 
         _context.Users.AddRange(FakeData.Users);
         _context.SaveChanges();
+
+        
+        
     }
 }

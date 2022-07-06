@@ -17,7 +17,6 @@ public class ApplicationContext : IdentityDbContext<User, IdentityRole<int>, int
     public DbSet<Tour> Tours { get; set; }
     public DbSet<TourType> TourTypes { get; set; }
     public DbSet<Transport> Transports { get; set; }
-
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
