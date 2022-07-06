@@ -4,7 +4,7 @@ using IdentityServer4;
 
 namespace IdentityServer
 {
-    public static class Configuration
+    public static class Configurations
     {
         public static IEnumerable<Client> GetClients() =>
             new List<Client>

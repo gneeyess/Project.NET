@@ -1,8 +1,5 @@
-using System.IdentityModel.Tokens.Jwt;
 using AutoMapper;
 using Dal.Entities;
-using Dal.Entities.Identity;
-using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -12,9 +9,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Modsen.App.Core.Mapping;
 using Modsen.App.DataAccess.Abstractions;
-using Modsen.App.DataAccess.Configurations;
 using Modsen.App.DataAccess.Data;
 using Modsen.App.DataAccess.Repositories;
+using System.IdentityModel.Tokens.Jwt;
+using Dal.Entities.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace Modsen.App.API
 {
@@ -39,13 +38,17 @@ namespace Modsen.App.API
 
             services.ConfigureAuthService(Configuration);
 
+            services.AddIdentity<User, IdentityRole<int>>()
+                .AddEntityFrameworkStores<ApplicationContext>();
+
+
             services.AddDbContext<ApplicationContext>(optionsAction =>
             {
                 optionsAction.UseSqlServer(Configuration.GetConnectionString("ModsenAppDataBase"),
                     c => c.MigrationsAssembly(typeof(Startup).Assembly.FullName));
                 optionsAction.UseLazyLoadingProxies();
             });
-
+           
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new UserMapper());
@@ -59,7 +62,7 @@ namespace Modsen.App.API
             services.AddScoped<IRepository<Tour>, TourRepository>();
             services.AddScoped<IRepository<TourType>, TourTypeRepository>();
             services.AddScoped<IRepository<Transport>, TransportRepository>();
-         
+
 
             //services
             services.AddScoped<IUnitOfWork, UnitOfWork>();
