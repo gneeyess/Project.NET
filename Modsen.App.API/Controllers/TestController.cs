@@ -4,12 +4,18 @@ using Microsoft.AspNetCore.Mvc;
 namespace Modsen.App.API.Controllers;
 
 [Route("api/[controller]")]
-[Authorize]
+
 [ApiController]
 public class TestController : ControllerBase
 {
+    [Authorize]
     [HttpGet]
     public IActionResult Get()
+    {
+        return Ok();
+    }
+    [HttpGet("un")]
+    public IActionResult GetUnAuthorize()
     {
         return Ok();
     }
