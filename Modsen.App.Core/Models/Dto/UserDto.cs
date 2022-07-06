@@ -14,9 +14,7 @@ namespace Modsen.App.Core.Models.Dto
 
         public string Phone { get; set; }
 
-        public virtual UserRole Role { get; set; }
-
-        public virtual ICollection<Booking> Bookings { get; set; }
+        //public List<Booking> Bookings { get; set; }
 
         // Does we need     public string Password { get; set; } ?
         // Does we need     public string RepeatPassword { get; set; } ?

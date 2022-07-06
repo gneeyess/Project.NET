@@ -11,11 +11,10 @@
   <ItemGroup>
     <Folder Include="Abstractions\" />
     <Folder Include="Data\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Modsen.App.Core\Modsen.App.Core.csproj" />
+    <ProjectReference Include="..\Dal.Entities\Dal.Entities.csproj" />
   </ItemGroup>
 
 </Project>

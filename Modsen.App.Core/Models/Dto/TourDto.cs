@@ -17,10 +17,10 @@ namespace Modsen.App.Core.Models.Dto
 
         public int Price { get; set; }
 
-        public virtual TourType TourType { get; set; }
+        //public TourType TourType { get; set; }
 
-        public virtual Transport Transport { get; set; }
+        //public Transport Transport { get; set; }
 
-        public virtual ICollection<Booking> Bookings { get; set; }
+        //public List<Booking> Bookings { get; set; }
     }
 }
