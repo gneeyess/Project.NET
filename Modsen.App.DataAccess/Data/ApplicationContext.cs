@@ -25,6 +25,5 @@ public class ApplicationContext : IdentityDbContext<User, IdentityRole<int>, int
         builder.ApplyConfiguration(new TourConfiguration());
         builder.ApplyConfiguration(new TourTypeConfiguration());
         builder.ApplyConfiguration(new TransportConfiguration());
-        builder.ApplyConfiguration(new UserConfiguration());
     }
 }
