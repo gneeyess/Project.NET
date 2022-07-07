@@ -11,6 +11,10 @@ namespace Modsen.App.DataAccess.Configurations
             builder.HasKey(booking => booking.Id);
             builder.HasIndex(booking => booking.Id).IsUnique();
 
+            // configures one-to-many relationship
+            builder.HasOne(t => t.Tour).WithMany(b => b.Bookings).HasForeignKey(k => k.Id).IsRequired();
+
+            builder.HasOne(u => u.User).WithMany(b => b.Bookings).HasForeignKey(k => k.Id).IsRequired();
 
             //builder.Property(p => p.Date).IsRequired();
             //builder.Property(p => p.Tour).IsRequired();

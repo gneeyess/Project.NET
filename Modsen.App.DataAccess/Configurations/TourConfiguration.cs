@@ -14,6 +14,11 @@ namespace Modsen.App.DataAccess.Configurations
             builder.Property(p => p.Name).IsRequired().HasMaxLength(15);
             builder.Property(p => p.Price).IsRequired().HasMaxLength(12);
 
+            // configures one-to-many relationship
+            builder.HasOne(t => t.TourType).WithMany(b => b.Tours).HasForeignKey(k => k.Id).IsRequired();
+
+            builder.HasOne(t => t.Transport).WithMany(b => b.Tours).HasForeignKey(k => k.Id).IsRequired();
+
             //builder.Property(p => p.Start).IsRequired();
             //Is p.End actually required?
             //builder.Property(p => p.TourType).IsRequired();
