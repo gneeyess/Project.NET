@@ -10,10 +10,7 @@ namespace Modsen.App.DataAccess.Configurations
         {
             builder.HasKey(tourType => tourType.Id);
             builder.HasIndex(tourType => tourType.Id).IsUnique();
-
             builder.Property(p => p.Name).IsRequired().HasMaxLength(15);
-
-            //builder.Property(p => p.Tours).IsRequired();
         }
     }
 }

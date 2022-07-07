@@ -20,10 +20,8 @@ namespace Modsen.App.DataAccess.Configurations
             builder.HasOne(t => t.Transport).WithMany(b => b.Tours).HasForeignKey(k => k.Id).IsRequired();
 
             //builder.Property(p => p.Start).IsRequired();
-            //Is p.End actually required?
-            //builder.Property(p => p.TourType).IsRequired();
-            //builder.Property(p => p.Transport).IsRequired();
-            //p.Description Is not required
+            //builder.Property(p => p.End).IsRequired();
+            //Description is not required
         }
     }
 }
