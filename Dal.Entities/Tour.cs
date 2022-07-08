@@ -13,8 +13,4 @@ public class Tour : BaseEntity
     public virtual Transport Transport { get; set; }
     public virtual ICollection<Booking> Bookings { get; set; }
 
-    public Tour()
-    {
-        Bookings = new List<Booking>();
-    }
 }

@@ -6,8 +6,4 @@ public class TourType : BaseEntity
 
     public virtual ICollection<Tour> Tours { get; set; }
 
-    public TourType()
-    {
-        Tours = new List<Tour>();
-    }
 }
