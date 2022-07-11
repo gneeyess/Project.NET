@@ -9,7 +9,7 @@ namespace Modsen.App.DataAccess.Configurations
         public void Configure(EntityTypeBuilder<TourType> builder)
         {
             builder.HasKey(tourType => tourType.Id);
-            builder.HasIndex(tourType => tourType.Id).IsUnique();
+
             builder.Property(p => p.Name).IsRequired().HasMaxLength(15);
 
         }
