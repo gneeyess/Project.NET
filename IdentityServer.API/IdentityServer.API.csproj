@@ -25,8 +25,4 @@
     <ProjectReference Include="..\Modsen.App.DataAccess\Modsen.App.DataAccess.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>

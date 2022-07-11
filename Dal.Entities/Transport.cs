@@ -6,8 +6,4 @@ public class Transport : BaseEntity
 
     public virtual ICollection<Tour> Tours { get; set; }
 
-    public Transport()
-    {
-        Tours = new List<Tour>();
-    }
 }

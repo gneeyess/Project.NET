@@ -67,6 +67,10 @@ namespace Modsen.App.API
             //services
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IDBInitializer, EFDBInitiliazer>();
+
+            //usermanager
+            services.AddScoped<User>();
+
         }
 
         protected virtual void ConfigureAuth(IApplicationBuilder app)
