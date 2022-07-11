@@ -17,7 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityServer", "IdentityS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.API", "IdentityServer.API\IdentityServer.API.csproj", "{2E35B792-432C-4000-8298-F61DFD8CCF19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dal.Entities", "Dal.Entities\Dal.Entities.csproj", "{EA35D2D8-6C10-49CF-9F10-D81ABDAB228C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dal.Entities", "Dal.Entities\Dal.Entities.csproj", "{EA35D2D8-6C10-49CF-9F10-D81ABDAB228C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modsen.App.NUnitTests", "Modsen.App.NUnitTests\Modsen.App.NUnitTests.csproj", "{E961D0A2-F686-4F1C-9475-8F41E29BB52C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{EA35D2D8-6C10-49CF-9F10-D81ABDAB228C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA35D2D8-6C10-49CF-9F10-D81ABDAB228C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA35D2D8-6C10-49CF-9F10-D81ABDAB228C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E961D0A2-F686-4F1C-9475-8F41E29BB52C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E961D0A2-F686-4F1C-9475-8F41E29BB52C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E961D0A2-F686-4F1C-9475-8F41E29BB52C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E961D0A2-F686-4F1C-9475-8F41E29BB52C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
