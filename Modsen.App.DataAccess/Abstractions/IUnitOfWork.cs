@@ -4,8 +4,8 @@ namespace Modsen.App.DataAccess.Abstractions;
 
 public interface IUnitOfWork
 {
-    public BookingRepository BookingRepository { get; }
-    public TourRepository TourRepository { get; }
-    public TourTypeRepository TourTypeRepository { get; }
-    public TransportRepository TransportRepository { get; }
+    BookingRepository BookingRepository { get; }
+    ITourRepository TourRepository { get; }
+    ITourTypeRepository TourTypeRepository { get; } 
+    ITransportRepository TransportRepository { get; }
 }
