@@ -16,7 +16,7 @@ namespace Modsen.App.Core.Models.Dto
 
         //public List<Booking> Bookings { get; set; }
 
-        // Does we need     public string Password { get; set; } ?
+        // Does we need     public string Password { get; set; } ? No, We already have it
         // Does we need     public string RepeatPassword { get; set; } ?
     }
 }
