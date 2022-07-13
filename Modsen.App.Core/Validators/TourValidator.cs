@@ -21,7 +21,7 @@ namespace Modsen.App.Core.Validators
 
     //        RuleFor(tour => tour).Must(IsValidDates);
     //    }
-    //    private bool IsValidPrice(int price)
+    //    private bool IsValidPrice(decimal price)
     //    {
     //        return price > 0;
     //    }

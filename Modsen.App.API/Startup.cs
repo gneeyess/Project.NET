@@ -7,15 +7,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Modsen.App.Core.Mapping;
 using Modsen.App.DataAccess.Abstractions;
 using Modsen.App.DataAccess.Data;
 using Modsen.App.DataAccess.Repositories;
 using System.IdentityModel.Tokens.Jwt;
 using Dal.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
-using Modsen.App.API.Services;
-using Modsen.App.Core.Services;
-using Mapping.Mappers;
 
 namespace Modsen.App.API
 {
@@ -53,9 +51,7 @@ namespace Modsen.App.API
            
             var mapperConfig = new MapperConfiguration(mc =>
             {
-                mc.AddProfile(new TourMapper());
-                mc.AddProfile(new TourTypeMapper());
-                mc.AddProfile(new TransportMapper());
+                mc.AddProfile(new UserMapper());
             });
             var mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
@@ -63,15 +59,18 @@ namespace Modsen.App.API
        //     services.AddValidatorsFromAssemblyContaining<BookingValidator>();
             //repositories
             services.AddScoped<IRepository<Booking>, BookingRepository>();
-            services.AddScoped<ITourRepository, TourRepository>();
-            services.AddScoped<ITourTypeRepository, TourTypeRepository>();
-            services.AddScoped<ITransportRepository, TransportRepository>();
+            services.AddScoped<IRepository<Tour>, TourRepository>();
+            services.AddScoped<IRepository<TourType>, TourTypeRepository>();
+            services.AddScoped<IRepository<Transport>, TransportRepository>();
 
 
             //services
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IDBInitializer, EFDBInitiliazer>();
-            services.AddScoped<ITourService, TourService>();
+
+            //usermanager
+            services.AddScoped<User>();
+
         }
 
         protected virtual void ConfigureAuth(IApplicationBuilder app)

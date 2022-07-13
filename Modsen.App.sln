@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.API", "Ident
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dal.Entities", "Dal.Entities\Dal.Entities.csproj", "{EA35D2D8-6C10-49CF-9F10-D81ABDAB228C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapping", "Mapping\Mapping.csproj", "{4A3A2074-E38F-4936-A6C6-3F0AA5B20486}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modsen.App.NUnitTests", "Modsen.App.NUnitTests\Modsen.App.NUnitTests.csproj", "{E961D0A2-F686-4F1C-9475-8F41E29BB52C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,10 @@ Global
 		{EA35D2D8-6C10-49CF-9F10-D81ABDAB228C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA35D2D8-6C10-49CF-9F10-D81ABDAB228C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA35D2D8-6C10-49CF-9F10-D81ABDAB228C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4A3A2074-E38F-4936-A6C6-3F0AA5B20486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A3A2074-E38F-4936-A6C6-3F0AA5B20486}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A3A2074-E38F-4936-A6C6-3F0AA5B20486}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A3A2074-E38F-4936-A6C6-3F0AA5B20486}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E961D0A2-F686-4F1C-9475-8F41E29BB52C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E961D0A2-F686-4F1C-9475-8F41E29BB52C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E961D0A2-F686-4F1C-9475-8F41E29BB52C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E961D0A2-F686-4F1C-9475-8F41E29BB52C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

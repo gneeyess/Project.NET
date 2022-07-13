@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Dal.Entities\Dal.Entities.csproj" />
-    <ProjectReference Include="..\Mapping\Mapping.csproj" />
     <ProjectReference Include="..\Modsen.App.Core\Modsen.App.Core.csproj" />
     <ProjectReference Include="..\Modsen.App.DataAccess\Modsen.App.DataAccess.csproj" />
   </ItemGroup>
