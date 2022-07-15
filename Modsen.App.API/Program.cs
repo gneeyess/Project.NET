@@ -10,13 +10,11 @@ namespace Modsen.App.API
 {
     public class Program
     {
-        private static readonly ILog _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog log4netLog = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
-
-            _log.Fatal("TESTING, KARL");
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -28,7 +26,7 @@ namespace Modsen.App.API
                 {
                     builder.SetMinimumLevel(LogLevel.Trace);
                     builder.AddLog4Net("log4net.config");
-                    _log.Fatal("TESTING 2, KARL");
-                }); //for logging
+                    log4netLog.Fatal("TESTING 2, KARL");
+                }); //for log4net
     }
 }
