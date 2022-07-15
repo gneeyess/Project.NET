@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections;
-using Microsoft.Extensions.Logging;
-using log4net;
-using System;
-using Modsen.App.API;
-using Dal.Entities.Identity;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Modsen.App.API.Controllers
 {
+    //I don't know does this class necessary.
+    //If actually not it can be deleted.
+
     [Route("api/[controller]")]
     [ApiController]
     public class LoggingController : ControllerBase

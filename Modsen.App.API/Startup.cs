@@ -15,21 +15,42 @@ using System.IdentityModel.Tokens.Jwt;
 using Dal.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Settings;
+using Serilog.Configuration;
 
 namespace Modsen.App.API
 {
     public class Startup
     {
-        private readonly IWebHostEnvironment _wevbostEnvironment;
+        private readonly IWebHostEnvironment _wevbostEnvironment; //idk what is it
 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            Log.Logger = new LoggerConfiguration().ReadFrom
+                .Configuration(configuration).CreateLogger();
+            //For Serilog
         }
 
         public Startup(IWebHostEnvironment env)
         {
+            //Maybe it can be deleted
             _wevbostEnvironment = env;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
+
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(Configuration).CreateLogger();
+
+            Log.Information("Starting up");
         }
 
         public IConfiguration Configuration { get; }
@@ -79,7 +100,6 @@ namespace Modsen.App.API
 
             //usermanager
             services.AddScoped<User>();
-
         }
 
         protected virtual void ConfigureAuth(IApplicationBuilder app)
