@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Modsen.App.Core.Mapping;
+using Modsen.App.Core;
 using Modsen.App.DataAccess.Abstractions;
 using Modsen.App.DataAccess.Data;
 using Modsen.App.DataAccess.Repositories;
@@ -51,17 +51,18 @@ namespace Modsen.App.API
            
             var mapperConfig = new MapperConfiguration(mc =>
             {
-                mc.AddProfile(new UserMapper());
+                //mc.AddProfile(new UserMapper()); FIX
             });
             var mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
 
        //     services.AddValidatorsFromAssemblyContaining<BookingValidator>();
+
             //repositories
             services.AddScoped<IRepository<Booking>, BookingRepository>();
-            services.AddScoped<IRepository<Tour>, TourRepository>();
-            services.AddScoped<IRepository<TourType>, TourTypeRepository>();
-            services.AddScoped<IRepository<Transport>, TransportRepository>();
+            //services.AddScoped<IRepository<Tour>, TourRepository>();             FIX
+            //services.AddScoped<IRepository<TourType>, TourTypeRepository>();     FIX
+            //services.AddScoped<IRepository<Transport>, TransportRepository>();   FIX
 
 
             //services
