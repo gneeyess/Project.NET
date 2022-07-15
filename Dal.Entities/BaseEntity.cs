@@ -5,8 +5,8 @@ namespace Dal.Entities;
 
 public abstract class BaseEntity
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    [Required]
+    //[Key]
+    //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    //[Required]
     public int Id { get; set; }
 }

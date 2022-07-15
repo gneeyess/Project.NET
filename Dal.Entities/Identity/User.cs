@@ -8,4 +8,5 @@ public class User : IdentityUser<int>
     public string LastName { get; set; }
 
     public virtual ICollection<Booking> Bookings { get; set; }
+
 }
