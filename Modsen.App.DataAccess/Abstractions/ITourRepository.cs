@@ -7,9 +7,11 @@ namespace Modsen.App.DataAccess.Abstractions;
 
 public interface ITourRepository
 {
-    Task<TourDto> GetByIdWithTrackingAsync(int id);
+
+    //FIX ME
+/*    Task<TourDto> GetByIdWithTrackingAsync(int id);
     Task<IEnumerable<TourShortDto>> GetQueueAsync(int offset, int size);
     Task DeleteByIdAsync(int id);
     Task UpdateAsync(Tour tour);
-    Task AddAsync(Tour tour);
+    Task AddAsync(Tour tour);*/
 }

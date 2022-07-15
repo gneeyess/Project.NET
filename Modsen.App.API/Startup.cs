@@ -14,14 +14,22 @@ using Modsen.App.DataAccess.Repositories;
 using System.IdentityModel.Tokens.Jwt;
 using Dal.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Modsen.App.API
 {
     public class Startup
     {
+        private readonly IWebHostEnvironment _wevbostEnvironment;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+        }
+
+        public Startup(IWebHostEnvironment env)
+        {
+            _wevbostEnvironment = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -50,23 +58,23 @@ namespace Modsen.App.API
             });
            
             var mapperConfig = new MapperConfiguration(mc =>
-            {
-                //mc.AddProfile(new UserMapper()); FIX
+            { 
+                //FIX ME mc.AddProfile(new UserMapper());
             });
             var mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-       //     services.AddValidatorsFromAssemblyContaining<BookingValidator>();
+            //services.AddValidatorsFromAssemblyContaining<BookingValidator>();
 
             //repositories
             services.AddScoped<IRepository<Booking>, BookingRepository>();
-            //services.AddScoped<IRepository<Tour>, TourRepository>();             FIX
-            //services.AddScoped<IRepository<TourType>, TourTypeRepository>();     FIX
-            //services.AddScoped<IRepository<Transport>, TransportRepository>();   FIX
+            //FIX ME services.AddScoped<IRepository<Tour>, TourRepository>();             FIX
+            //FIX ME services.AddScoped<IRepository<TourType>, TourTypeRepository>();     FIX
+            //FIX ME services.AddScoped<IRepository<Transport>, TransportRepository>();   FIX
 
 
             //services
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            //FIX ME services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IDBInitializer, EFDBInitiliazer>();
 
             //usermanager
