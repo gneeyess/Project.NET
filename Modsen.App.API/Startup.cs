@@ -28,18 +28,13 @@ namespace Modsen.App.API
         {
             Configuration = configuration;
 
-			/*            Log.Logger = new LoggerConfiguration()
-							.WriteTo.File("Serilog LOGs\\logfile.log")
-							//.WriteTo.Console() //оно просто ложит логгер и все
-							.CreateLogger();*/
-
 			Log.Logger = new LoggerConfiguration().ReadFrom
 				.Configuration(configuration)
                 .Enrich.FromLogContext()
                 .CreateLogger();
 			//Параметры в appsettings.json
 
-			Log.Information(">>>>> Logger Configurated");
+			Log.Information(">>>>> Logger Configurated (Modsen.App.API)");
             //For Serilog
         }
 
@@ -72,7 +67,7 @@ namespace Modsen.App.API
            
             var mapperConfig = new MapperConfiguration(mc =>
             { 
-                //FIX ME mc.AddProfile(new UserMapper());
+                mc.AddProfile(new UserMapper());
             });
             var mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
@@ -81,13 +76,13 @@ namespace Modsen.App.API
 
             //repositories
             services.AddScoped<IRepository<Booking>, BookingRepository>();
-            //FIX ME services.AddScoped<IRepository<Tour>, TourRepository>();             FIX
-            //FIX ME services.AddScoped<IRepository<TourType>, TourTypeRepository>();     FIX
-            //FIX ME services.AddScoped<IRepository<Transport>, TransportRepository>();   FIX
+            services.AddScoped<IRepository<Tour>, TourRepository>();             
+            services.AddScoped<IRepository<TourType>, TourTypeRepository>();     
+            services.AddScoped<IRepository<Transport>, TransportRepository>();   
 
 
             //services
-            //FIX ME services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IDBInitializer, EFDBInitiliazer>();
 
             //usermanager

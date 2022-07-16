@@ -9,8 +9,6 @@ namespace Modsen.App.API
 {
     public class Program
     {
-        private static readonly ILogger<Program> logger = new Logger<Program>(new LoggerFactory());
-
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
