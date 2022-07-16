@@ -33,10 +33,10 @@ namespace Modsen.App.API
             Log.Logger = new LoggerConfiguration().ReadFrom
                 .Configuration(configuration)
                 .Enrich.FromLogContext()
+                .Enrich.WithMachineName()
                 .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri("http://localhost:10001"))
                 {
                     AutoRegisterTemplate = true,
-                    IndexFormat = "Serilog-dev-022022"
                 })
                 //.WriteTo.Http("http://localhost:10001", 1024, 2048, 1024, 1024)
                 .CreateLogger();
