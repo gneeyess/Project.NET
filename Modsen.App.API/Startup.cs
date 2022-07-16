@@ -21,6 +21,8 @@ using Serilog;
 using Serilog.Settings;
 using Serilog.Configuration;
 using Serilog.Sinks.Elasticsearch;
+using Mapping;
+using Mapping.Mappers;
 
 namespace Modsen.App.API
 {
@@ -76,9 +78,7 @@ namespace Modsen.App.API
            
             var mapperConfig = new MapperConfiguration(mc =>
             { 
-                //mc.AddProfile(new UserMapper());
-                //Нету UserMapper();
-                //Не знаю где он. Вроде был когда-то.
+                mc.AddProfile(new UserMapper());
             });
             var mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
@@ -99,7 +99,7 @@ namespace Modsen.App.API
             services.AddScoped<IDBInitializer, EFDBInitiliazer>();
 
             //usermanager
-            services.AddScoped<User>();
+            services.AddScoped<Dal.Entities.Identity.User>(); //CHECK ME
         }
 
         protected virtual void ConfigureAuth(IApplicationBuilder app)

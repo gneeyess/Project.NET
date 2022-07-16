@@ -2,12 +2,13 @@
 using Dal.Entities;
 using Modsen.App.Core.Models.Dto;
 
-namespace Mapping.Mappers;
-
-public class TourTypeMapper : Profile
+namespace Mapping.Mappers
 {
-    public TourTypeMapper()
+    public class TourTypeMapper : Profile
     {
-        CreateMap<TourType, TourTypeDto>();
+        public TourTypeMapper()
+        {
+            CreateMap<TourType, TourTypeDto>();
+        }
     }
 }
