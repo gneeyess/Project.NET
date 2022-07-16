@@ -31,6 +31,7 @@ namespace Modsen.App.API
 			Log.Logger = new LoggerConfiguration().ReadFrom
 				.Configuration(configuration)
                 .Enrich.FromLogContext()
+                .WriteTo.Http("http://localhost:8080")
                 .CreateLogger();
 			//Параметры в appsettings.json
 
