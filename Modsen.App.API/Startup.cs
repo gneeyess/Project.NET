@@ -37,6 +37,7 @@ namespace Modsen.App.API
                 .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri("http://localhost:10001"))
                 {
                     AutoRegisterTemplate = true,
+                    IndexFormat = $"context-logs-{DateTime.UtcNow:yyyy-mm-dd-hh}"
                 })
                 //.WriteTo.Http("http://localhost:10001", 1024, 2048, 1024, 1024)
                 .CreateLogger();
