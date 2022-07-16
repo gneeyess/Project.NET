@@ -18,7 +18,7 @@ public class TestController : ControllerBase
     [HttpGet]
     public IActionResult Get()
     {
-        return Ok();
+        return Ok(); //Why?
     }
     [HttpGet("un")]
     public IActionResult GetUnAuthorize()

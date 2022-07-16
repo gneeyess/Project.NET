@@ -24,33 +24,21 @@ namespace Modsen.App.API
 {
     public class Startup
     {
-        private readonly IWebHostEnvironment _wevbostEnvironment; //idk what is it
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
 
-            Log.Logger = new LoggerConfiguration().ReadFrom
-                .Configuration(configuration).CreateLogger();
-            //For Serilog
-        }
-
-        public Startup(IWebHostEnvironment env)
-        {
-            //Maybe it can be deleted
-            _wevbostEnvironment = env;
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-
-            Configuration = builder.Build();
-
             Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(Configuration).CreateLogger();
+                .WriteTo.File("Serilog LOGs\\logfile.log")
+                //.WriteTo.Console() оно просто ложит логгер и все
+                .CreateLogger();
 
-            Log.Information("Starting up");
+            /*Log.Logger = new LoggerConfiguration().ReadFrom
+                .Configuration(configuration).CreateLogger(); */
+            //Другой вариант. Параметры тогда писать в appsettings.json
+
+            Log.Information(">>>>> Logger Configurated");
+            //For Serilog
         }
 
         public IConfiguration Configuration { get; }
@@ -58,6 +46,8 @@ namespace Modsen.App.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Log.Information("Startup.ConfigureServices()");
+
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
@@ -111,6 +101,8 @@ namespace Modsen.App.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDBInitializer dbInitializer)
         {
+            Log.Information("Startup.Configure()");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

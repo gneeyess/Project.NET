@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace IdentityServer.API.Controllers
 {
@@ -17,6 +18,7 @@ namespace IdentityServer.API.Controllers
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            Log.Information("AccountController constructed");
         }
 
         // GET: /Account/Register
@@ -60,8 +62,8 @@ namespace IdentityServer.API.Controllers
                     }
                 }
             }
+            Log.Information("AccountController.Register()");
             return Ok();
         }
-
     }
 }
