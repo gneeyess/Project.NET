@@ -1,3 +1,4 @@
+using System;
 using AutoMapper;
 using Dal.Entities;
 using Microsoft.AspNetCore.Builder;
@@ -19,6 +20,7 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Settings;
 using Serilog.Configuration;
+using Serilog.Sinks.Elasticsearch;
 
 namespace Modsen.App.API
 {
@@ -28,12 +30,17 @@ namespace Modsen.App.API
         {
             Configuration = configuration;
 
-			Log.Logger = new LoggerConfiguration().ReadFrom
-				.Configuration(configuration)
+            Log.Logger = new LoggerConfiguration().ReadFrom
+                .Configuration(configuration)
                 .Enrich.FromLogContext()
-                .WriteTo.Http("http://localhost:8080")
+                .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri("http://localhost:10001"))
+                {
+                    AutoRegisterTemplate = true,
+                    IndexFormat = "Serilog-dev-022022"
+                })
+                //.WriteTo.Http("http://localhost:10001", 1024, 2048, 1024, 1024)
                 .CreateLogger();
-			//Параметры в appsettings.json
+			//Параметры частично в appsettings.json
 
 			Log.Information(">>>>> Logger Configurated (Modsen.App.API)");
             //For Serilog
