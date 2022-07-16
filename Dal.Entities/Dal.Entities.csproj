@@ -7,14 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="C:\Users\User\.nuget\packages\log4net.elasticsearch\2.5.0\contentFiles\any\netstandard2.0\LICENSE" />
-    <Content Remove="C:\Users\User\.nuget\packages\log4net.elasticsearch\2.5.0\contentFiles\any\netstandard2.0\readme.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.6" />
     <PackageReference Include="Serilog" Version="2.11.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="6.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
   </ItemGroup>
 
 </Project>

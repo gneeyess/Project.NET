@@ -28,16 +28,18 @@ namespace Modsen.App.API
         {
             Configuration = configuration;
 
-            Log.Logger = new LoggerConfiguration()
-                .WriteTo.File("Serilog LOGs\\logfile.log")
-                //.WriteTo.Console() оно просто ложит логгер и все
+			/*            Log.Logger = new LoggerConfiguration()
+							.WriteTo.File("Serilog LOGs\\logfile.log")
+							//.WriteTo.Console() //оно просто ложит логгер и все
+							.CreateLogger();*/
+
+			Log.Logger = new LoggerConfiguration().ReadFrom
+				.Configuration(configuration)
+                .Enrich.FromLogContext()
                 .CreateLogger();
+			//Параметры в appsettings.json
 
-            /*Log.Logger = new LoggerConfiguration().ReadFrom
-                .Configuration(configuration).CreateLogger(); */
-            //Другой вариант. Параметры тогда писать в appsettings.json
-
-            Log.Information(">>>>> Logger Configurated");
+			Log.Information(">>>>> Logger Configurated");
             //For Serilog
         }
 
@@ -46,7 +48,7 @@ namespace Modsen.App.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            Log.Information("Startup.ConfigureServices()");
+            Log.Debug("In Startup.ConfigureServices()");
 
             services.AddControllers();
 
@@ -101,7 +103,7 @@ namespace Modsen.App.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDBInitializer dbInitializer)
         {
-            Log.Information("Startup.Configure()");
+            Log.Debug("In Startup.Configure()");
 
             if (env.IsDevelopment())
             {
@@ -127,6 +129,8 @@ namespace Modsen.App.API
                 //endpoints.MapControllers();
             });
 
+            app.UseSerilogRequestLogging(); //Just check
+
             dbInitializer.Initialize();
         }
     }
@@ -135,6 +139,8 @@ namespace Modsen.App.API
     {
         public static void ConfigureAuthService(this IServiceCollection services, IConfiguration configuration)
         {
+            Log.Debug("In Startup.cs CustomExtensionsMethods.ConfigureAuthService(...)");
+
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
 
             var identityUrl = configuration.GetValue<string>("IdentityUrl");
