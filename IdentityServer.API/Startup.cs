@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Modsen.App.DataAccess.Data;
+using Serilog;
+using Serilog.Sinks.Elasticsearch;
 
 namespace IdentityServer
 {
@@ -14,6 +16,22 @@ namespace IdentityServer
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            Log.Logger = new LoggerConfiguration().ReadFrom
+                .Configuration(configuration)
+                .Enrich.FromLogContext()
+                .Enrich.WithMachineName()
+                .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri("http://localhost:10001"))
+                {
+                    AutoRegisterTemplate = true,
+                    IndexFormat = $"context-logs-{DateTime.UtcNow:yyyy-mm-dd-hh}"
+                })
+                //.WriteTo.Http("http://localhost:10001", 1024, 2048, 1024, 1024)
+                .CreateLogger();
+            //Параметры частично в appsettings.json
+
+            Log.Information(">>>>> Logger Configurated (IdentityServer)");
+            //For Serilog
         }
 
         public IConfiguration Configuration { get; }
@@ -78,6 +96,8 @@ namespace IdentityServer
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "Modsen.App v1");
                 });
             }
+
+            app.UseSerilogRequestLogging(); //Doing much
 
             app.UseHttpsRedirection();
 

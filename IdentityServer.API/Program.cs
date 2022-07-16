@@ -1,3 +1,5 @@
+using Serilog;
+
 namespace IdentityServer
 {
     public class Program
@@ -9,6 +11,7 @@ namespace IdentityServer
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

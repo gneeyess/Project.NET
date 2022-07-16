@@ -1,0 +1,14 @@
+2022-07-16 02:21:48.172 +03:00 [INF] Startup.Configure()
+2022-07-16 02:21:50.037 +03:00 [INF] EFDBInitiliazer.Initialize
+2022-07-16 03:08:16.451 +03:00 [INF] WORK
+2022-07-16 03:08:35.668 +03:00 [INF] WORK
+2022-07-16 03:10:25.797 +03:00 [INF] Logger Configurated
+2022-07-16 03:10:27.160 +03:00 [INF] In ConfigureLogging
+2022-07-16 03:14:56.979 +03:00 [INF] Logger Configurated
+2022-07-16 03:14:57.178 +03:00 [INF] Startup.ConfigureServices()
+2022-07-16 03:15:03.031 +03:00 [INF] In ConfigureLogging
+2022-07-16 03:15:54.385 +03:00 [INF] >>>>> Logger Configurated
+2022-07-16 03:15:54.636 +03:00 [INF] Startup.ConfigureServices()
+2022-07-16 03:15:55.471 +03:00 [INF] In ConfigureLogging
+2022-07-16 03:20:52.183 +03:00 [INF] >>>>> Logger Configurated
+2022-07-16 03:20:52.907 +03:00 [INF] Startup.ConfigureServices()

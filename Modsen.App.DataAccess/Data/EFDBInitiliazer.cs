@@ -3,6 +3,7 @@ using System.Linq;
 using Dal.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Modsen.App.DataAccess.Abstractions;
+using Serilog;
 
 namespace Modsen.App.DataAccess.Data;
 
@@ -16,6 +17,8 @@ public class EFDBInitiliazer : IDBInitializer
     }
     public void Initialize()
     {
+        Log.Information("In EFDBInitiliazer.Initialize()");
+
         _context.Database.EnsureDeleted();
         _context.Database.EnsureCreated();
 
@@ -58,9 +61,6 @@ public class EFDBInitiliazer : IDBInitializer
         }
 
         _context.Users.AddRange(FakeData.Users);
-        _context.SaveChanges();
-
-        
-        
+        _context.SaveChanges();         
     }
 }

@@ -2,12 +2,13 @@
 using Dal.Entities;
 using Modsen.App.Core.Models.Dto;
 
-namespace Mapping.Mappers;
-
-public class TransportMapper :Profile
+namespace Mapping.Mappers
 {
-    public TransportMapper()
+    public class TransportMapper : Profile
     {
-        CreateMap<Transport, TransportDto>();
+        public TransportMapper()
+        {
+            CreateMap<Transport, TransportDto>();
+        }
     }
 }

@@ -1,5 +1,9 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using System;
+using Microsoft.Extensions.Logging;
+using Modsen.App.API.Controllers;
+using Serilog;
 
 namespace Modsen.App.API
 {
@@ -12,6 +16,7 @@ namespace Modsen.App.API
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

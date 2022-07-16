@@ -3,6 +3,7 @@ using Modsen.App.Core.Models.Dto;
 using Modsen.App.Core.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace Modsen.App.API.Controllers
 {
@@ -15,6 +16,7 @@ namespace Modsen.App.API.Controllers
         public TourController(ITourService tourService)
         {
             _tourService = tourService;
+            Log.Information("TourController constructed");
         }
         [HttpGet("id")]
         public async Task<TourDto> GetByIdAsync(int id)
