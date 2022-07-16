@@ -67,7 +67,9 @@ namespace Modsen.App.API
            
             var mapperConfig = new MapperConfiguration(mc =>
             { 
-                mc.AddProfile(new UserMapper());
+                //mc.AddProfile(new UserMapper());
+                //Нету UserMapper();
+                //Не знаю где он. Вроде был когда-то.
             });
             var mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
@@ -82,7 +84,9 @@ namespace Modsen.App.API
 
 
             //services
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            //FIX ME 
+            //services.AddScoped<IUnitOfWork, UnitOfWork>(); <<<<<<<<<<<<<
             services.AddScoped<IDBInitializer, EFDBInitiliazer>();
 
             //usermanager
