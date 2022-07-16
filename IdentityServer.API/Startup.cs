@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Modsen.App.DataAccess.Data;
 using Serilog;
+using Serilog.Sinks.Elasticsearch;
 
 namespace IdentityServer
 {
@@ -19,10 +20,17 @@ namespace IdentityServer
             Log.Logger = new LoggerConfiguration().ReadFrom
                 .Configuration(configuration)
                 .Enrich.FromLogContext()
+                .Enrich.WithMachineName()
+                .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri("http://localhost:10001"))
+                {
+                    AutoRegisterTemplate = true,
+                    IndexFormat = $"context-logs-{DateTime.UtcNow:yyyy-mm-dd-hh}"
+                })
+                //.WriteTo.Http("http://localhost:10001", 1024, 2048, 1024, 1024)
                 .CreateLogger();
-            //Параметры в appsettings.json
+            //Параметры частично в appsettings.json
 
-            Log.Information(">>>>> Logger Configurated (IdentityServer.API (!!!))");
+            Log.Information(">>>>> Logger Configurated (IdentityServer)");
             //For Serilog
         }
 
