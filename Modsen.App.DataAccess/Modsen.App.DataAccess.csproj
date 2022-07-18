@@ -9,10 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Dal.Entities\Dal.Entities.csproj" />
     <ProjectReference Include="..\Modsen.App.Core\Modsen.App.Core.csproj" />
   </ItemGroup>

@@ -1,3 +1,5 @@
+using Modsen.App.API.Controllers;
+
 namespace Modsen.App.NUnitTests
 {
     public class Tests
@@ -7,10 +9,10 @@ namespace Modsen.App.NUnitTests
         {
         }
        */
+
         [Test]
         public void Test1()
         {
-            Assert.Pass();
         }
     }
 }

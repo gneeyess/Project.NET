@@ -6,11 +6,11 @@ using Modsen.App.DataAccess.Abstractions;
 
 namespace Modsen.App.DataAccess.Data;
 
-public class EFDBInitiliazer : IDBInitializer
+public class DBInitiliazer : IDBInitializer
 {
     private readonly ApplicationContext _context;
 
-    public EFDBInitiliazer(ApplicationContext context)
+    public DBInitiliazer(ApplicationContext context)
     {
         _context = context;
     }
