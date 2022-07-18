@@ -1,5 +1,7 @@
 using AutoMapper;
-using Dal.Entities;
+using Dal.Entities.Identity;
+using FluentValidation;
+using Mapping.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -7,13 +9,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Modsen.App.Core.Mapping;
+using Modsen.App.API.Services;
+using Modsen.App.Core.Services;
 using Modsen.App.DataAccess.Abstractions;
 using Modsen.App.DataAccess.Data;
 using Modsen.App.DataAccess.Repositories;
 using System.IdentityModel.Tokens.Jwt;
-using Dal.Entities.Identity;
-using Microsoft.AspNetCore.Identity;
+using Validation.Validators;
 
 namespace Modsen.App.API
 {
@@ -38,10 +40,6 @@ namespace Modsen.App.API
 
             services.ConfigureAuthService(Configuration);
 
-            //services.AddIdentity<User, IdentityRole<int>>()
-            //    .AddEntityFrameworkStores<ApplicationContext>();
-
-
             services.AddDbContext<ApplicationContext>(optionsAction =>
             {
                 optionsAction.UseSqlServer(Configuration.GetConnectionString("ModsenAppDataBase"),
@@ -51,24 +49,26 @@ namespace Modsen.App.API
            
             var mapperConfig = new MapperConfiguration(mc =>
             {
-                mc.AddProfile(new UserMapper());
+                mc.AddProfile(new TourMapper());
+                mc.AddProfile(new TourTypeMapper());
+                mc.AddProfile(new TransportMapper());
             });
             var mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-       //     services.AddValidatorsFromAssemblyContaining<BookingValidator>();
+            services.AddValidatorsFromAssemblyContaining<BookingValidator>();
             //repositories
-            services.AddScoped<IRepository<Booking>, BookingRepository>();
-            services.AddScoped<IRepository<Tour>, TourRepository>();
-            services.AddScoped<IRepository<TourType>, TourTypeRepository>();
-            services.AddScoped<IRepository<Transport>, TransportRepository>();
+            services.AddScoped<IBookingRepository, BookingRepository>();
+            services.AddScoped<ITourRepository, TourRepository>();
+            services.AddScoped<ITourTypeRepository, TourTypeRepository>();
+            services.AddScoped<ITransportRepository, TransportRepository>();
 
 
             //services
+            services.AddScoped<ITourService, TourService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IDBInitializer, EFDBInitiliazer>();
+            services.AddScoped<IDBInitializer, DBInitiliazer>();
 
-            //usermanager
             services.AddScoped<User>();
 
         }

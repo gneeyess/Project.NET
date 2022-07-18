@@ -5,14 +5,12 @@ namespace Modsen.App.DataAccess.Repositories;
 
 public class UnitOfWork : IUnitOfWork
 {
-    // DELETE ME ? No there are will be some logic
-
-    private readonly IRepository<Booking> _bookingRepository;
+    private readonly IBookingRepository _bookingRepository;
     private readonly ITourRepository _tourRepository;
     private readonly ITourTypeRepository _tourTypeRepository;
     private readonly ITransportRepository _transportRepository;
 
-    public UnitOfWork(IRepository<Booking> bookingRepository,
+    public UnitOfWork(IBookingRepository bookingRepository,
         ITourRepository tourRepository,
         ITourTypeRepository tourTypeRepository,
         ITransportRepository transportRepository)
@@ -23,7 +21,7 @@ public class UnitOfWork : IUnitOfWork
         _transportRepository = transportRepository;
     }
 
-    public BookingRepository BookingRepository => (BookingRepository)_bookingRepository;
+    public IBookingRepository BookingRepository => _bookingRepository;
 
     public ITourRepository TourRepository => _tourRepository;
 
