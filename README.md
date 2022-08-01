@@ -1,4 +1,4 @@
-﻿<h1>Application – Booking a tour in Belarus</h1> 
+<h1>Application – Booking a tour in Belarus</h1> 
 <br>
 <h1>Goal:</h1> 
 <p>It is necessary to develop an application for searching excursions, which will allow you to book a place for an excursion. The application must be able to select tours by filters.</p>
@@ -9,7 +9,7 @@
 (Scheme: https://www.figma.com/file/9wgYj9NBONd43Y6QrbwOsq/Untitled?node-id=0%3A1)
 <img src="images/scheme.png" style="width: 70%; height: auto;"/>
  </li>
-  <li>Implement the application using .NET Core 3.1 and REST API technology</li>
+  <li>Implement the application using .NET Core 6 and REST API technology</li>
   <li>There should be support for 2 types of roles: user and administrator</li>
   <li>For authentication use IdentityServer4
 (https://identityserver4.readthedocs.io/en/latest/)
